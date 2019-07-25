@@ -1,0 +1,503 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Lato', sans-serif;
+  padding: 0px;
+}
+
+nav {
+  background-image: url(../img/bg-seriales3.png);
+  padding: 20px;
+}
+
+.redessociales a{
+    text-decoration: none;
+    color: #2a6171;
+  }
+
+.logo {
+  display: flex;
+  margin: 0 auto;
+  width: 100%;
+  height:100%;
+}
+
+.menu-items {
+  align-items: center;
+  display: flex;
+}
+
+.menu-items{
+list-style-type: none;
+text-align: center;
+width: 80%;
+border-radius: 30px;
+margin: auto;
+padding-top: 10px;
+padding-bottom: 10px;
+}
+
+.menu-items a:hover {
+  background-color: #f34472;
+}
+
+.menu-items a {
+  text-transform: uppercase;
+  font-family: 'Righteous', cursive;
+  color: white;
+  padding: 10px 0 10px 0;
+  border: 2px solid #2a6171;
+  border-radius: 30px;
+  width: 100%;
+  background-color: #75cac3;
+}
+
+.menu-items a.play-btn {
+  background-color: #f34472;
+}
+
+main {
+  padding: 30px;
+  background-image: url(../img/bg-seriales.png);
+
+}
+
+.subtitulo {
+  color: #f34472;
+  text-align: center;
+  font-size: 1.3rem;
+}
+
+.titulo {
+  text-align: center;
+  margin: 20px;
+  font-family: 'Righteous', cursive;
+  color: #2b6170;
+  font-size: 2.6rem;
+}
+
+.registro, .contraseñaNueva {
+  display: flex;
+  flex-direction: column;
+  background-color: #f34573;
+  padding: 50px 80px;
+  border-radius: 30px;
+  justify-content: space-evenly;
+  margin: auto;
+}
+
+.registro, .contraseñaNueva label {
+  font-size: 1.2rem;
+}
+
+.aclaracion {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.btn-formulario {
+  background-color: #75cac2;
+  color: white;
+  font-family: 'Righteous', cursive;
+  font-size: 1.3rem;
+  justify-content: center;
+  margin: 40px auto 0;
+  border: 2px solid #2b6170;
+  border-radius: 30px;
+  padding: 10px 20px;
+  text-transform: uppercase;
+}
+
+.recordar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline;
+  margin-top: 30px;
+  font-size: 1rem;
+}
+
+#check1 {
+  margin-right: 8px;
+}
+
+.recordar label {
+  font-size: 1rem;
+}
+
+.olvidar-pass {
+  text-align: right;
+  color: white;
+}
+
+.irARegistro{
+  padding-top: 30px;
+}
+
+/*parte de Aldi*/
+
+* {
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 0;
+}
+
+/*Css Home*/
+.bannerHome {
+  align-self: center;
+}
+
+
+.explicacion {
+  align-self: center;
+  background-color: #F34573;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 2%;
+  text-align: justify;
+  border-bottom-right-radius: 20px;
+  box-shadow: #2a6171 2px 2px;
+  width: 60%;
+  margin-top: 30px;
+}
+
+.explicacion p {
+  font-family: 'Lato', sans-serif;
+}
+
+.tarjeta-1 {
+  background-image: url("../img/bg-seriales.png");
+  display: flex;
+  padding: 2% 3%;
+}
+
+.botonJugar {
+  text-align: center;
+  border: 2px solid #2a6171;
+  border-radius: 30px;
+  width: 30%;
+  padding: 10px 0 10px 0;
+  background-color: #75cac3;
+  margin: auto;
+  color: #ffffff;
+  font-family: 'Righteous', cursive;
+  text-transform: uppercase;
+}
+
+.botonJugar:hover {
+  color:#f34573;
+  text-decoration: none;
+  }
+
+/*Css Juego*/
+.bienvenida {
+  display: flex;
+  margin-bottom: 0.5%;
+  border-radius: 10px;
+}
+
+.saludo {
+  color: #F34573;
+  padding: 0 10px;;
+  font-size: 1rem;
+  padding-right: 2%;
+  flex: 1;
+  margin-bottom: 0;
+}
+
+
+.tarjetaJuegoA {
+  background-image: url("../img/bg-seriales.png");
+  display: flex;
+
+}
+
+.tituloA {
+  font-family: 'Righteous', cursive;
+  align-self: center;
+  color: white;
+  background-color: #F34573;
+  box-shadow: #2a6171 4px 4px;
+  border-bottom-right-radius: 20px;
+}
+
+.pregunta {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.respuesta {
+  flex-basis: 50%;
+}
+
+.respuesta button {
+  font-family: 'Lato', sans-serif;
+  color: #2a6171;
+  font-size: 1.5em;
+  font-weight: bold;
+  background-color: #75cac3;
+  border: 3px solid #2a6171;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  border-radius: 6px;
+  /*background-image: url(img-Aldi/LaCasaDePapel1.jpg);
+  background-size: cover;*/
+  }
+
+  /*Media queries*/
+ @media (min-width:320px){
+
+  .saludo {
+    text-align: center;
+    padding-bottom: 2%;
+    padding: 0 10px;
+  }
+
+  .tarjeta-1, .tarjetaJuegoA {
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+
+  .bannerHome {
+    border-left: none;
+    margin-top: 20px;
+    margin-bottom: 5px;
+  }
+
+  #banner1 {display: block;}
+  #banner2 {display: none;}
+
+  .bannerHome img {
+    width: 100%;
+  }
+
+  .explicacion {
+    width: 100%;
+  }
+
+  .tarjetaJuegoA {
+    flex-direction: row;
+    padding-top: 4%;
+    padding-left: 3%;
+    padding-right: 3%;
+  }
+
+  .tituloA{
+    text-align: center;
+    padding: 20px;
+  }
+
+  .footer-principal a{
+    width: 100vw;
+    font-family: 'Righteous', cursive;
+    font-size:0.7rem;
+    padding: 3px;
+
+    }
+    .font-preguntas{
+      font-size: 1rem;
+    }
+    }
+  @media (min-width:720px){
+
+    .redessociales{
+      position: relative;
+      top: -12px;
+    }
+
+  .saludo{
+    text-align: right;
+    padding-bottom: 2%;
+    padding: 0 10px;
+    }
+
+    #banner1 {display: none;}
+    #banner2 {display: block;}
+
+    .bannerHome img {
+      max-width: 100%;
+    }
+
+    .explicacion {
+      width: 100%;
+    }
+
+    .tarjetaJuegoA {
+      flex-direction: column;
+      flex-wrap: nowrap;
+      padding-top: 4%;
+    }
+
+    .tituloA{
+      width: 90%;
+    }
+
+    .pregunta{
+      height: 75%;
+      width: 90%;
+    }
+    .footer-principal a{
+      width: 100vw;
+      font-family: 'Righteous', cursive;
+      font-size:1rem;
+      padding: 5px;
+
+      }
+      .font-preguntas{
+
+        font-size: 1.2rem;
+
+
+      }
+  }
+
+  @media (min-width:1200px){
+
+    .redessociales{
+      position: relative;
+      top: -24px;
+    }
+
+    .bannerHome{
+      margin-top: 0;
+    }
+
+    .bannerHome img {
+      width: 100vw;
+    }
+
+    .explicacion {
+      margin-top: 1%;
+      width: 60%;
+    }
+
+    .explicacion p {
+      font-size: 1.1em;
+    }
+
+    .tarjeta-1 {
+      padding-top: 4%;
+    }
+
+    .tarjetaJuegoA {
+    padding-top: 4%;
+    padding-bottom: 1%;
+    }
+
+    .tituloA,
+    .pregunta {
+      width: 90%;
+    }
+
+    .tituloA{
+      text-align: center;
+      padding: 20px;
+      font-size: 2em;
+    }
+
+    .respuesta {
+      font-size: 2em;
+    }
+    .footer-principal a{
+      width: 100vw;
+      font-family: 'Righteous', cursive;
+      font-size:1.3rem;
+      padding: 6px;
+
+      }
+      .font-preguntas{
+
+        font-size: 1.5rem;
+      }
+
+  }
+  /**perteneciente a pagina de preguntas frecuentes**/
+main .main-pf {
+  padding: 30px;
+  background-image: url(../img/bg-seriales.png);
+
+}
+
+.preguntas-frecuentes{
+width:80%;
+margin: 0 auto;
+}
+.card-header{
+width: 100%;
+background-color: #f34573;
+color: black;
+
+}
+.card-body{
+text-align: left;
+font-family: Verdana, cursive;
+}
+
+.font-preguntas{
+  text-decoration: none;
+  font-family: 'Righteous', cursive;
+  text-align: left;
+  color: white;
+
+}
+.font-preguntas:hover{
+  text-decoration: none;
+  font-family: 'Righteous', cursive;
+  text-align: left;
+  color: #75cac3;
+
+}
+/**Codigo de Footer**/
+.main-footer{
+
+  background-image: url(../img/bg-seriales.png);
+
+}
+.footer-principal{
+
+	width:100%; /* Establecemos que el header abarque el 100% del documento */
+
+	background-image: url(../img/bg-seriales2.png);
+  width: 100%;
+  height:100px;
+
+  margin-top: 30px;
+  /*FLEXBOX*/
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px 20px 0 0;
+
+  }
+  .footer-principal a{
+    color:#fff;
+    text-align: center;
+    text-decoration: none;
+    border-left:1px solid #fff;
+
+  }
+  .footer-principal a:hover{
+    color:#f34573;
+    text-decoration: none;
+    }
+  .footer-principal a:nth-child(1){
+      border-left: 0;
+    }
+    .mostrar {
+          display: block;
+          text-align: center;
+          }
+    .noMostrar{
+        display: none;
+            }
+  .avatar{
+  display: flex;
+  flex-direction: row;
+
+  }
+  .avatar img{
+    border:1px solid #75cac3;
+  }
