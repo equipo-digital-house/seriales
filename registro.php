@@ -1,35 +1,57 @@
-
 <?php
-$mostrar="noMostrar";
-$valor=0;
-require_once("helpers.php");
+require_once("autoload.php");
+if ($_POST){
+  //Esta variable es quien controla si se desea guardar en archivo JSON o en MYSQL
+  $tipoConexion = "MYSQL";
+  // Si la función retorn false, significa que se va a guardar los datos en JSON, de lo contrario se guardará los datos en MYSQL
+  if($tipoConexion=="JSON"){
+    $usuario = new Usuario($_POST["email"],$_POST["password"],$_POST["repassword"],$_POST["nombre"],$_FILES );
 
-require_once("controladores/funciones.php");
+    $errores = $validar->validacionUsuario($usuario, $_POST["repassword"]);
 
-$titulo = "Registro";
+    if(count($errores)==0){
+      $usuarioEncontrado = $json->buscarEmail($usuario->getEmail());
 
-if($_POST) {
+      if($usuarioEncontrado != null){
+        $errores["email"]="Usuario ya registrado";
+      }else{
+        $avatar = $registro->armarAvatar($usuario->getAvatar());
+        $registroUsuario = $registro->armarUsuario($usuario,$avatar);
 
-  $errores = validar($_POST,'registro');
-  $existeUsuario=existeUsuario($_POST["email"]);
+        $json->guardar($registroUsuario);
 
-  if($existeUsuario==true){
-
-    $errores["email"] = "El correo electrónico está asociado con otro usuario";
-    $valor=2;
-  } else {
-
-  if(count($errores)== 0){
-    $avatar = armarAvatar($_FILES, $_POST["email"]);
-    $usuario = armarUsuario($_POST, $avatar);
-    guardarUsuario($usuario);
-    $valor=1;
-    header("location: login.php?mensaje=$valor");
-    exit;
+        redirect ("login.php");
+      }
+    }
   }
+ else{
+   //Si arriba en la variable $tipoConexion se coloco "MYSQL", entonces genero todo el trabajo pero con MYSQL.
+  //Aquí genero mi objeto usuario, partiendo de la clase Usuario
+  $usuario = new Usuario($_POST["email"],$_POST["password"],$_POST["repassword"],$_POST["nombre"],$_FILES );
+  //Aquí verifico si los datos registrados por el usuario pasan las validaciones
+  $errores = $validar->validacionUsuario($usuario, $_POST["repassword"]);
+  //De no existir errores entonces:
+  if(count($errores)==0){
+    //Busco a ver si el usuario existe o no en la base de datos
+    $usuarioEncontrado = BaseMYSQL::buscarPorEmail($usuario->getEmail(),$pdo,'users');
+    if($usuarioEncontrado != false){
+      $errores["email"]= "Usuario ya Registrado";
+    }else{
+      //Aquí guardo en el servidor la foto que el usuario seleccionó
+      $avatar = $registro->armarAvatar($usuario->getAvatar());
+      //Aquí procedo a guardar los datos del usuario en la base de datos, ,aquí le paso el objeto PDO, el objeto usuario, la tabla donde se va a guardar los datos y el nombre del archivo de la imagen del usuario.
+      BaseMYSQL::guardarUsuario($pdo,$usuario,'users',$avatar);
+      //Aquí redirecciono el usuario al login
+      redirect ("login.php");
+    }
+  }
+
+ }
 }
-}
- ?>
+
+
+?>
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -42,38 +64,36 @@ require_once("php/head.php");
     require_once('php/header.php');
     ?>
 
+    <?php
+      if(isset($errores)):?>
+        <ul class="alert alert-danger">
+          <?php
+          foreach ($errores as $key => $value) :?>
+            <li> <?=$value;?> </li>
+            <?php endforeach;?>
+        </ul>
+      <?php endif;?>
+
     <main>
       <h3 class="subtitulo">¿Todavía no tenés cuenta?</h3>
       <h2 class="titulo">Registrate en segundos</h2>
       <div class="row">
         <div class="col-12 col-lg-6 offset-lg-3">
-          <?php if(isset($errores)) :?>
-            <ul class="alert alert-danger">
-              <?php foreach ($errores as $key => $value) :?>
-                <li> <?=$value?></li>
-              <?php endforeach;
-              if ($valor==2)
-              $mostrar="mostrar";?>
-              <div class="<?=$mostrar?> alert alert-danger">
-              <p class=<?=$mostrar?>> Este correo electrónico ya existe, puede se haya registrado con este Email y no recuerde su contraseña. <a class=<?=$mostrar?>"rosa olvidar-pass" href="olvideContraseña.php">¿ Si es así, ingrese aquí?</a> </p>
-              <p class=<?=$mostrar?>> Si no, le solicitamos complete este formulario con otro correo electrónico. </p>
 
-            <? endif;
-              $valor=0;
-              $mostrar="noMostrar"; ?>
-            </ul>
-          <?php endif; ?>
           <form class="registro" action="registro.php" method="post" enctype= "multipart/form-data">
 
 
             <label for="nombre">Nombre de usuario*</label>
-            <input type="text" name="nombre" value="<?= isset($errores["nombre"])? "": persistir("nombre") ?>" required>
+            <input name="nombre" type="text" id="nombre"  value="<?=(isset($errores["nombre"]) )? "" : inputUsuario("nombre");?>" placeholder="Nombre de usuario..." />
+
             <label for="email">Tu correo electrónico*</label>
-            <input type="email" name="email" value="<?= isset($errores["email"])? "": persistir("email") ?>" required>
+            <input name="email" type="text" id="email" value="<?=isset($errores["email"])? "":inputUsuario("email") ;?>" placeholder="Correo electrónico"/>
+
             <label for="password">Contraseña*</label>
-            <input type="password" name="password" value=""required>
+            <input name="password" type="password" id="password" value="" placeholder="Contraseña..." />
+
             <label for="repassword">Repetir contraseña*</label>
-            <input type="password" name="repassword" value=""required>
+            <input name="repassword" type="password" id="repassword" value="" placeholder="Rectifique su contraseña" />
             <label for="avatar">Foto de tu perfil:</label>
             <input  type="file" name="avatar" value="">
             <button class="btn-formulario" type="submit" name="submit">¡Registrarme!</button>

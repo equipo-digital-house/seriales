@@ -2,7 +2,7 @@
 class Validador{
 
     public function validacionUsuario($usuario){
-        
+
         $errores=array();
         $nombre = trim($usuario->getNombre());
         if(isset($nombre)) {
@@ -10,18 +10,18 @@ class Validador{
                 $errores["nombre"]= "El campo nombre no debe estar vacio";
             }
         }
-    
+
         $email = trim($usuario->getEmail());
         if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-            $errores["email"]="Email invalido !!!!!";
+            $errores["email"]="Email ingresado es invalido";
         }
         $password= trim($usuario->getPassword());
-   
+
         $repassword = trim($usuario->getRepassword());
-        
+
 
         if(empty($password)){
-            $errores["password"]= "Hermano querido el campo password no lo podés dejar en blanco";
+            $errores["password"]= "El campo password no debe estar vacio";
         }elseif (strlen($password)<6) {
             $errores["password"]="La contraseña debe tener como mínimo 6 caracteres";
         }
@@ -41,53 +41,52 @@ class Validador{
                 }
             }
         }
-    
+
         return $errores;
     }
     //Metodo creado para validar el login del usuario
     public function validacionLogin($usuario){
         $errores=array();
-    
+
         $email = trim($usuario->getEmail());
         if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-            $errores["email"]="Email invalido !!!!!";
+            $errores["email"]="Email ingresado es invalido";
         }
         $password= trim($usuario->getPassword());
-       
+
         if(empty($password)){
-            $errores["password"]= "Hermano querido el campo password no lo podés dejar en blanco";
+            $errores["password"]= "El campo password no debe estar vacio";
         }elseif (strlen($password)<6) {
             $errores["password"]="La contraseña debe tener como mínimo 6 caracteres";
         }
-    
+
         return $errores;
     }
     //Método para validar si el usuario desea recuperar su contraseña
     public function validacionOlvide($usuario){
-        
+
         $errores=array();
-    
+
         $email = trim($usuario->getEmail());
         if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-            $errores["email"]="Email invalido !!!!!";
+            $errores["email"]="Email ingresado es invalido";
         }
         $password= trim($usuario->getPassword());
-   
+
         $repassword = trim($usuario->getRepassword());
-        
+
 
         if(empty($password)){
-            $errores["password"]= "Hermano querido el campo password no lo podés dejar en blanco";
+            $errores["password"]= "El campo password no debe estar vacio";
         }elseif (strlen($password)<6) {
             $errores["password"]="La contraseña debe tener como mínimo 6 caracteres";
         }
         if(empty($repassword)){
-            $errores["repassword"]= "Hermano querido el campo confirmar nuevo password no lo podés dejar en blanco";
+            $errores["repassword"]= "El campo confirmar nuevo password no debe estar vacio";
         }
-    
+
         return $errores;
     }
 
 
 }
-

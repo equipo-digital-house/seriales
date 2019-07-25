@@ -24,17 +24,18 @@ class BaseMYSQL extends BaseDatos{
     }
 
     static public function guardarUsuario($pdo,$usuario,$tabla,$avatar){
-        $sql = "insert into $tabla (name,email,password,avatar,role) values (:name,:email,:password,:avatar,:role )";
+        $sql = "insert into $tabla (name,email,password,avatar,access,level) values (:name,:email,:password,:avatar,:access,:level )";
         $query = $pdo->prepare($sql);
         $query->bindValue(':name',$usuario->getnombre());
         $query->bindValue(':email',$usuario->getEmail());
         $query->bindValue(':password',Encriptar::hashPassword($usuario->getPassword()));
         $query->bindValue(':avatar',$avatar);
-        $query->bindValue('role',1);
+        $query->bindValue(':access',0);
+        $query->bindValue(':level',1);
         $query->execute();
 
     }
-  
+
     public function leer(){
         //A futuro trabajaremos en esto
     }
@@ -48,4 +49,4 @@ class BaseMYSQL extends BaseDatos{
         //Este fue el método usao para json
     }
 
-} 
+}

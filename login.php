@@ -1,47 +1,58 @@
 <?php
-  require_once("controladores/funciones.php");
-  require_once("helpers.php");
-  $titulo = "Login";
+require_once("autoload.php");
+if($_POST){
+  $tipoConexion = "MYSQL";
+  if($tipoConexion=="JSON"){
+      $usuario = new Usuario($_POST["email"],$_POST["password"]);
+      $errores= $validar->validacionLogin($usuario);
+      if(count($errores)==0){
 
-  $mostrar="noMostrar";
-  $valor=0;
-  if($_GET){
-  $valor=$_GET["mensaje"];
-  }
-
-  if($_POST){
-    $errores = validar($_POST,'login');
-
-    if(count($errores) == 0){
-
-      $usuario = buscarPorEmail($_POST["email"]);
-
-
-      if($usuario == null){
-        $errores["email"]= "Usuario / Contraseña invalidos";
-      }else{
-        if(password_verify($_POST["password"],$usuario["password"])==false){
-          $errores["password"]="Usuario / Contraseña invalidos";
-        }else {
-          seteoUsuario($usuario,$_POST);
-          if(validarAcceso()){
-            header("location: juego.php");
-            exit;
+        $usuarioEncontrado = $json->buscarPorEmail($usuario->getEmail());
+        if($usuarioEncontrado == null){
+          $errores["email"]="Usuario no existe";
+        }else{
+          if(Autenticador::verificarPassword($usuario->getPassword(),$usuarioEncontrado["password"] )!=true){
+            $errores["password"]="Error en los datos verifique";
           }else{
-            header("location: login.php");
-            exit;
+            Autenticador::seteoSesion($usuarioEncontrado);
+            if(isset($_POST["recordar"])){
+              Autenticador::seteoCookie($usuarioEncontrado);
+            }
+            if(Autenticador::validarUsuario()){
+              redirect("perfil.php");
+            }else{
+              redirect("registro.php");
+            }
           }
-
         }
       }
+  }else{
 
+      $usuario = new Usuario($_POST["email"],$_POST["password"]);
+      $errores= $validar->validacionLogin($usuario);
+      if(count($errores)==0){
+        $usuarioEncontrado = BaseMYSQL::buscarPorEmail($usuario->getEmail(),$pdo,'users');
+        if($usuarioEncontrado == false){
+          $errores["email"]="Usuario no registrado";
+        }else{
+          if(Autenticador::verificarPassword($usuario->getPassword(),$usuarioEncontrado["password"] )!=true){
+            $errores["password"]="Error en los datos verifique";
+          }else{
+            Autenticador::seteoSesion($usuarioEncontrado);
+            if(isset($_POST["recordar"])){
+              Autenticador::seteoCookie($usuarioEncontrado);
+            }
+            if(Autenticador::validarUsuario()){
+              redirect("perfil.php");
+            }else{
+              redirect("registro.php");
+            }
+          }
+        }
       }
   }
-
-
-
+}
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <?php
@@ -58,29 +69,20 @@ require_once("php/head.php");
       <h2 class="titulo">Iniciar sesion</h2>
       <div class="row">
         <div class="col-12 col-lg-6 offset-lg-3">
-          <?php if ($valor==1)
-            $mostrar="mostrar";?>
-            <div class="<?=$mostrar?> alert alert-success">
-              <p class=<?=$mostrar?>> Se han ingresado correctamente los datos.</p>
-              <p class=<?=$mostrar?>> ¡Vuelva a iniciar sesión para jugar! </p>
-          <? endif;
-            $valor=0;
-            $mostrar="noMostrar"; ?>
-          </div>
           <?php
-          if(isset($errores)):?>
-          <ul class="alert alert-danger">
-            <?php foreach ($errores as $key => $value) :?>
-              <li><?=$value;?></li>
-            <?php endforeach;?>
-          </ul>
-
-        <?php endif;?>
+            if(isset($errores)):?>
+              <ul class="alert alert-danger">
+                <?php
+                foreach ($errores as $key => $value) :?>
+                  <li> <?=$value;?> </li>
+                  <?php endforeach;?>
+              </ul>
+            <?php endif;?>
           <form class="registro" action="login.php" method="post">
             <label for="email">Email*</label>
-            <input type="text" name="email" value="" required>
+          <input name="email" type="text" id="email"   value="<?=isset($errores["email"])? "":inputUsuario("email") ;?>" placeholder="Correo electrónico"/>
             <label for="password">Contraseña*</label>
-            <input type="password" name="password" value=""required>
+          <input name="password" type="password" id="password"  value="" placeholder="Contraseña..." />
             <button class="btn-formulario" type="submit" name="submit">iniciar sesión</button>
             <div class="recordar">
               <input name="recordarme" type="checkbox" id="check1" value="recordarme">
