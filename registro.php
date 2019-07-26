@@ -84,16 +84,16 @@ require_once("php/head.php");
 
 
             <label for="nombre">Nombre de usuario*</label>
-            <input name="nombre" type="text" id="nombre"  value="<?=(isset($errores["nombre"]) )? "" : inputUsuario("nombre");?>" placeholder="Nombre de usuario..." />
+            <input name="nombre" type="text" id="nombre"  value="<?=(isset($errores["nombre"]) )? "" : inputUsuario("nombre");?>" />
 
             <label for="email">Tu correo electrónico*</label>
-            <input name="email" type="text" id="email" value="<?=isset($errores["email"])? "":inputUsuario("email") ;?>" placeholder="Correo electrónico"/>
+            <input name="email" type="text" id="email" value="<?=isset($errores["email"])? "":inputUsuario("email") ;?>" />
 
             <label for="password">Contraseña*</label>
-            <input name="password" type="password" id="password" value="" placeholder="Contraseña..." />
+            <input name="password" type="password" id="password" value="" />
 
             <label for="repassword">Repetir contraseña*</label>
-            <input name="repassword" type="password" id="repassword" value="" placeholder="Rectifique su contraseña" />
+            <input name="repassword" type="password" id="repassword" value="" />
             <label for="avatar">Foto de tu perfil:</label>
             <input  type="file" name="avatar" value="">
             <button class="btn-formulario" type="submit" name="submit">¡Registrarme!</button>

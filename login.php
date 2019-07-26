@@ -80,9 +80,9 @@ require_once("php/head.php");
             <?php endif;?>
           <form class="registro" action="login.php" method="post">
             <label for="email">Email*</label>
-          <input name="email" type="text" id="email"   value="<?=isset($errores["email"])? "":inputUsuario("email") ;?>" placeholder="Correo electrónico"/>
+          <input name="email" type="text" id="email"   value="<?=isset($errores["email"])? "":inputUsuario("email") ;?>" />
             <label for="password">Contraseña*</label>
-          <input name="password" type="password" id="password"  value="" placeholder="Contraseña..." />
+          <input name="password" type="password" id="password"  value="" />
             <button class="btn-formulario" type="submit" name="submit">iniciar sesión</button>
             <div class="recordar">
               <input name="recordarme" type="checkbox" id="check1" value="recordarme">
