@@ -14,8 +14,8 @@ require_once("clases/Query.php");
 //Declaro mis variables
 $host = "localhost";
 $bd = "seriales_db";
-$usuario = "root";
-$password = "root";
+$usuario = "";
+$password = "";
 $puerto = "3306";
 $charset = "utf8mb4";
 
