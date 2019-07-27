@@ -2,7 +2,7 @@
 class Validador{
 
     public function validacionUsuario($usuario){
-        $errores = array();
+        $errores = [];
         $nombre = trim($usuario->getNombre());
 
         if(isset($nombre)) {
@@ -48,18 +48,20 @@ class Validador{
 
     //Metodo creado para validar el login del usuario
     public function validacionLogin($usuario){
-        $errores = array();
+        $errores = [];
 
         $email = trim($usuario->getEmail());
+
         if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-          $errores["email"] = "El correo ingresado es inválido";
+          $errores["email"] = "El email no es válido";
         }
+
         $password= trim($usuario->getPassword());
 
         if(empty($password)){
-          $errores["password"] = "El campo no puede estar vacío";
-        }elseif (strlen($password)<6) {
-          $errores["password"] = "La contraseña debe tener seis caracteres como mínimo";
+          $errores["password"] = "Debe ingresar una contraseña";
+        } else if (strlen($password)<6) {
+          $errores["password"] = "La contraseña debe tener 6 caracteres como mínimo";
         }
 
         return $errores;
@@ -69,7 +71,7 @@ class Validador{
     //Método para validar si el usuario desea recuperar su contraseña
     public function validacionOlvide($usuario){
 
-        $errores = array();
+        $errores = [];
 
         $email = trim($usuario->getEmail());
         if(!filter_var($email, FILTER_VALIDATE_EMAIL)){

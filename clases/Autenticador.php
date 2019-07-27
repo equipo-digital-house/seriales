@@ -9,8 +9,8 @@ class Autenticador{
         return password_verify($password,$passwordHash);
     }
     static public function seteoSesion($user){
-        
-        $_SESSION["name"]=$user["name"];
+
+        $_SESSION["name"]= $user["name"];
         $_SESSION["email"] = $user["email"];
         $_SESSION["role"]= $user["role"];
         $_SESSION["avatar"]= $user["avatar"];
@@ -22,12 +22,11 @@ class Autenticador{
     static public function validarUsuario(){
         if(isset($_SESSION["email"])){
             return true;
-        }elseif (isset($_COOKIE["email"])) {
-            $_SESSION["email"]=$_COOKIE["email"];
+        } else if (isset($_COOKIE["email"])) {
+            $_SESSION["email"]= $_COOKIE["email"];
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 }
-
