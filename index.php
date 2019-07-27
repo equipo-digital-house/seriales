@@ -1,5 +1,4 @@
-<?php require_once("controladores/funciones.php");
-
+<?php 
 $titulo = "Inicio";
  ?>
 

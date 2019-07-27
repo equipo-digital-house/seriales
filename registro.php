@@ -10,10 +10,10 @@ if ($_POST){
     $errores = $validar->validacionUsuario($usuario, $_POST["repassword"]);
 
     if(count($errores)==0){
-      $usuarioEncontrado = $json->buscarEmail($usuario->getEmail());
+      $usuarioEncontrado = $json->buscarPorEmail($usuario->getEmail());
 
       if($usuarioEncontrado != null){
-        $errores["email"]="Usuario ya registrado";
+        $errores["email"] = "Usuario ya registrado";
       }else{
         $avatar = $registro->armarAvatar($usuario->getAvatar());
         $registroUsuario = $registro->armarUsuario($usuario,$avatar);
@@ -35,7 +35,7 @@ if ($_POST){
     //Busco a ver si el usuario existe o no en la base de datos
     $usuarioEncontrado = BaseMYSQL::buscarPorEmail($usuario->getEmail(),$pdo,'users');
     if($usuarioEncontrado != false){
-      $errores["email"]= "Usuario ya Registrado";
+      $errores["email"] = "Usuario ya registrado";
     }else{
       //Aquí guardo en el servidor la foto que el usuario seleccionó
       $avatar = $registro->armarAvatar($usuario->getAvatar());
@@ -64,16 +64,6 @@ require_once("php/head.php");
     require_once('php/header.php');
     ?>
 
-    <?php
-      if(isset($errores)):?>
-        <ul class="alert alert-danger">
-          <?php
-          foreach ($errores as $key => $value) :?>
-            <li> <?=$value;?> </li>
-            <?php endforeach;?>
-        </ul>
-      <?php endif;?>
-
     <main>
       <h3 class="subtitulo">¿Todavía no tenés cuenta?</h3>
       <h2 class="titulo">Registrate en segundos</h2>
@@ -85,17 +75,26 @@ require_once("php/head.php");
 
             <label for="nombre">Nombre de usuario*</label>
             <input name="nombre" type="text" id="nombre"  value="<?=(isset($errores["nombre"]) )? "" : inputUsuario("nombre");?>" />
+            <span class="error"> <?=(isset($errores["nombre"]))? $errores["nombre"] :"";?></span>
+
 
             <label for="email">Tu correo electrónico*</label>
             <input name="email" type="text" id="email" value="<?=isset($errores["email"])? "":inputUsuario("email") ;?>" />
+            <span class="error"> <?=(isset($errores["email"]))? $errores["email"] :"";?></span>
+
 
             <label for="password">Contraseña*</label>
             <input name="password" type="password" id="password" value="" />
+            <span class="error"> <?=(isset($errores["password"]))? $errores["password"] :"";?></span>
 
             <label for="repassword">Repetir contraseña*</label>
             <input name="repassword" type="password" id="repassword" value="" />
+            <span class="error"><?=(isset($errores["repassword"]))? $errores["repassword"] :"";?></span>
+
             <label for="avatar">Foto de tu perfil:</label>
             <input  type="file" name="avatar" value="">
+            <span class="error"><?=(isset($errores["avatar"]))? $errores["avatar"] :"";?></span>
+
             <button class="btn-formulario" type="submit" name="submit">¡Registrarme!</button>
           </form>
         </div>

@@ -37,6 +37,23 @@ if($_POST){
         }else{
           if(Autenticador::verificarPassword($usuario->getPassword(),$usuarioEncontrado["password"] )!=true){
             $errores["password"]="Error en los datos verifique";
+  $errores= $validar->validacionLogin($usuario);
+
+  if(count($errores)==0){
+    $usuarioEncontrado = BaseMYSQL::buscarPorEmail($usuario->getEmail(),$pdo,'users');
+
+      if($usuarioEncontrado == false) {
+        $errores["email"]="Usuario no registrado";
+      } else {
+          if(Autenticador::verificarPassword($usuario->getPassword(), $usuarioEncontrado["password"])!=true) {
+          $errores["password"]= "Error en los datos verifique";
+        } else {
+          Autenticador::seteoSesion($usuarioEncontrado);
+          if(isset($_POST["recordar"])){
+            Autenticador::seteoCookie($usuarioEncontrado);
+          }
+          if(Autenticador::validarUsuario()){
+            redirect("perfil.php");
           }else{
             Autenticador::seteoSesion($usuarioEncontrado);
             if(isset($_POST["recordar"])){
@@ -47,11 +64,14 @@ if($_POST){
             }else{
               redirect("registro.php");
             }
+            redirect("registro.php");
           }
         }
       }
   }
+    }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="es">

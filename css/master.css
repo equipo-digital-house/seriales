@@ -134,6 +134,11 @@ main {
 
 /*parte de Aldi*/
 
+.error{
+  font-size: 1rem;
+  color: white;
+}
+
 * {
   box-sizing: border-box;
   margin: 0 auto;
