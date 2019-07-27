@@ -2,87 +2,90 @@
 class Validador{
 
     public function validacionUsuario($usuario){
-
-        $errores=array();
+        $errores = array();
         $nombre = trim($usuario->getNombre());
+
         if(isset($nombre)) {
-            if(empty($nombre)){
-                $errores["nombre"]= "El campo nombre no debe estar vacio";
+          if(empty($nombre)){
+            $errores["nombre"] = "El campo no puede estar vacío";
             }
         }
 
         $email = trim($usuario->getEmail());
         if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-            $errores["email"]="Email ingresado es invalido";
+            $errores["email"] = "El correo ingresado es inválido";
         }
-        $password= trim($usuario->getPassword());
-
+        $password = trim($usuario->getPassword());
         $repassword = trim($usuario->getRepassword());
 
-
         if(empty($password)){
-            $errores["password"]= "El campo password no debe estar vacio";
+            $errores["password"] = "El campo no puede estar vacío";
         }elseif (strlen($password)<6) {
-            $errores["password"]="La contraseña debe tener como mínimo 6 caracteres";
+            $errores["password"] = "La contraseña debe tener seis caracteres como mínimo";
         }
+
         if(isset($repassword)){
             if ($password != $repassword) {
-                $errores["repassword"]="Las contraseñas no coinciden";
+                $errores["repassword"] = "Las contraseñas no coinciden";
             }
         }
+
         if($usuario->getAvatar()!=null){
-            if($_FILES["avatar"]["error"]!=0){
-                $errores["avatar"]="Error debe subir imagen";
-            }else{
-                $nombre = $_FILES["avatar"]["name"];
-                $ext = pathinfo($nombre,PATHINFO_EXTENSION);
-                if($ext != "png" && $ext != "jpg"){
-                    $errores["avatar"]="Debe seleccionar archivo png ó jpg";
+          if($_FILES["avatar"]["error"]!=0){
+            $errores["avatar"] = "Por favor, sube una foto";
+          }else{
+            $nombre = $_FILES["avatar"]["name"];
+            $ext = pathinfo($nombre,PATHINFO_EXTENSION);
+            if($ext != "png" && $ext != "jpg"){
+            $errores["avatar"] = "La extensión de la imagen debe ser .png o .jpg";
                 }
             }
         }
 
         return $errores;
     }
+
+
     //Metodo creado para validar el login del usuario
     public function validacionLogin($usuario){
-        $errores=array();
+        $errores = array();
 
         $email = trim($usuario->getEmail());
         if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-            $errores["email"]="Email ingresado es invalido";
+          $errores["email"] = "El correo ingresado es inválido";
         }
         $password= trim($usuario->getPassword());
 
         if(empty($password)){
-            $errores["password"]= "El campo password no debe estar vacio";
+          $errores["password"] = "El campo no puede estar vacío";
         }elseif (strlen($password)<6) {
-            $errores["password"]="La contraseña debe tener como mínimo 6 caracteres";
+          $errores["password"] = "La contraseña debe tener seis caracteres como mínimo";
         }
 
         return $errores;
     }
+
+
     //Método para validar si el usuario desea recuperar su contraseña
     public function validacionOlvide($usuario){
 
-        $errores=array();
+        $errores = array();
 
         $email = trim($usuario->getEmail());
         if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-            $errores["email"]="Email ingresado es invalido";
+          $errores["email"] = "El correo ingresado es inválido";
         }
         $password= trim($usuario->getPassword());
-
         $repassword = trim($usuario->getRepassword());
 
 
         if(empty($password)){
-            $errores["password"]= "El campo password no debe estar vacio";
+          $errores["password"] = "El campo no puede estar vacío";
         }elseif (strlen($password)<6) {
-            $errores["password"]="La contraseña debe tener como mínimo 6 caracteres";
+          $errores["password"] = "La contraseña debe tener seis caracteres como mínimo";
         }
         if(empty($repassword)){
-            $errores["repassword"]= "El campo confirmar nuevo password no debe estar vacio";
+          $errores["repassword"] = "Las contraseñas no coinciden";
         }
 
         return $errores;
