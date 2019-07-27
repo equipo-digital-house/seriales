@@ -1,11 +1,12 @@
 <?php
-require_once("controladores/funciones.php");
+require_once("autoload.php");
+
 
 $titulo = "Preguntas Frecuentes";
  ?>
 
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="es" dir="ltr">
 <?php
 require_once("php/head.php");
  ?>

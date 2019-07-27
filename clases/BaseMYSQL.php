@@ -14,7 +14,7 @@ class BaseMYSQL extends BaseDatos{
     }
     static public function buscarPorEmail($email,$pdo,$tabla){
         //Aquí hago la sentencia select, para buscar el email, estoy usando bindeo de parámetros por value
-        $sql = "select * from $tabla where email = :email";
+        $sql = "SELECT * from $tabla where email = :email";
         // Aquí ejecuto el prepare de los datos
         $query = $pdo->prepare($sql);
         $query->bindValue(':email',$email);
@@ -24,14 +24,23 @@ class BaseMYSQL extends BaseDatos{
     }
 
     static public function guardarUsuario($pdo,$usuario,$tabla,$avatar){
-        $sql = "insert into $tabla (name,email,password,avatar,access,level) values (:name,:email,:password,:avatar,:access,:level )";
+        $sql = "INSERT INTO $tabla (name,email,password,avatar,access,level) values (:name,:email,:password,:avatar,:access,:level )";
         $query = $pdo->prepare($sql);
-        $query->bindValue(':name',$usuario->getnombre());
+        $query->bindValue(':name',$usuario->getNombre());
         $query->bindValue(':email',$usuario->getEmail());
         $query->bindValue(':password',Encriptar::hashPassword($usuario->getPassword()));
         $query->bindValue(':avatar',$avatar);
         $query->bindValue(':access',0);
         $query->bindValue(':level',1);
+        $query->execute();
+
+    }
+
+    static public function guardarPreguntaFrecuente($pdo, $tabla, $preguntaFrecuente){
+        $sql = "INSERT INTO $tabla (name, answer) values (:name,:answer)";
+        $query = $pdo->prepare($sql);
+        $query->bindValue(':name', $preguntaFrecuente->getName());
+        $query->bindValue(':answer', $preguntaFrecuente->getAnswer());
         $query->execute();
 
     }
