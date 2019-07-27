@@ -1,2 +1,2 @@
 *.DS_Store
-autoload.php
+/autoload.php
