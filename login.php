@@ -1,57 +1,67 @@
 <?php
 require_once("autoload.php");
+
+$titulo = "Login";
+
 if($_POST){
   $tipoConexion = "MYSQL";
-  if($tipoConexion=="JSON"){
-      $usuario = new Usuario($_POST["email"],$_POST["password"]);
-      $errores= $validar->validacionLogin($usuario);
-      if(count($errores)==0){
+  // if($tipoConexion=="JSON"){
+  //     $usuario = new Usuario($_POST["email"],$_POST["password"]);
+  //     $errores= $validar->validacionLogin($usuario);
+  //     if(count($errores)==0){
+  //       $usuarioEncontrado = $json->buscarPorEmail($usuario->getEmail());
+  //       if($usuarioEncontrado == null){
+  //         $errores["email"]="Usuario no existe";
+  //       }else{
+  //         if(Autenticador::verificarPassword($usuario->getPassword(),$usuarioEncontrado["password"] )!=true){
+  //           $errores["password"]="Error en los datos verifique";
+  //         }else{
+  //           Autenticador::seteoSesion($usuarioEncontrado);
+  //           if(isset($_POST["recordar"])){
+  //             Autenticador::seteoCookie($usuarioEncontrado);
+  //           }
+  //           if(Autenticador::validarUsuario()){
+  //             redirect("perfil.php");
+  //           }else{
+  //             redirect("registro.php");
+  //           }
+  //         }
+  //       }
+  //     }
+  // }else{
 
-        $usuarioEncontrado = $json->buscarPorEmail($usuario->getEmail());
-        if($usuarioEncontrado == null){
-          $errores["email"]="Usuario no existe";
-        }else{
-          if(Autenticador::verificarPassword($usuario->getPassword(),$usuarioEncontrado["password"] )!=true){
-            $errores["password"]="Error en los datos verifique";
-          }else{
-            Autenticador::seteoSesion($usuarioEncontrado);
-            if(isset($_POST["recordar"])){
-              Autenticador::seteoCookie($usuarioEncontrado);
-            }
-            if(Autenticador::validarUsuario()){
-              redirect("perfil.php");
-            }else{
-              redirect("registro.php");
-            }
-          }
-        }
-      }
-  }else{
-
+  //Se instancia a un nuevo usuario
       $usuario = new Usuario($_POST["email"],$_POST["password"]);
+
       $errores= $validar->validacionLogin($usuario);
+
       if(count($errores)==0){
         $usuarioEncontrado = BaseMYSQL::buscarPorEmail($usuario->getEmail(),$pdo,'users');
+
         if($usuarioEncontrado == false){
-          $errores["email"]="Usuario no registrado";
-        }else{
-          if(Autenticador::verificarPassword($usuario->getPassword(),$usuarioEncontrado["password"] )!=true){
-            $errores["password"]="Error en los datos verifique";
-          }else{
+          $errores["email"]="Usuario / Contraseña inválidos";
+        } else {
+
+          if(Autenticador::verificarPassword($usuario->getPassword(), $usuarioEncontrado["password"])==false) {
+            $errores["password"]= "Usuario / Contraseña inválidos";
+          } else {
+
             Autenticador::seteoSesion($usuarioEncontrado);
-            if(isset($_POST["recordar"])){
+
+            if(isset($_POST["recordarme"])) {
               Autenticador::seteoCookie($usuarioEncontrado);
             }
-            if(Autenticador::validarUsuario()){
+
+            if(Autenticador::validarUsuario()) {
               redirect("perfil.php");
-            }else{
+            } else {
               redirect("registro.php");
             }
           }
         }
       }
   }
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="es">

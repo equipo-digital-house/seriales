@@ -1,18 +1,19 @@
-<?php require_once("controladores/funciones.php");
-
-$titulo = "Inicio";
- ?>
-
-<!DOCTYPE html>
-<html lang="es" dir="ltr">
 <?php
-require_once("php/head.php");
- ?>
-  <body>
-    <div class="container-fluid p-0">
+$titulo = "Inicio";
 
-        <?php
-         require_once('php/header.php');
+require_once("autoload.php");
+
+?>
+
+ <!DOCTYPE html>
+ <html lang="en" dir="ltr">
+ <?php
+ require_once("php/head.php");
+  ?>
+   <body>
+     <div class="container-fluid p-0">
+       <?php
+       require_once('php/header.php');
        ?>
 
 
