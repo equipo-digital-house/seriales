@@ -5,7 +5,7 @@
     <ul class="row" style="margin-bottom: 0;">
       <a href="index.php" class="offset-3 col-6 col-md-2 offset-md-0"><img class="logo" src="img/logoSerialesFB.png" alt="Seriales"></a>
       <li class="col-12 flex-column flex-md-row col-md-2 menu-items"><a href="index.php">inicio</a></li>
-      <li class="col-12 flex-column flex-md-row col-md-2 menu-items"><a href="preguntas.php">preguntas</a></li>
+      <li class="col-12 flex-column flex-md-row col-md-2 menu-items"><a href="preguntasFrecuentes.php">preguntas</a></li>
       <li class="col-12 flex-column flex-md-row col-md-2 menu-items">
         <?php if(isset($_SESSION["email"])): ?>
           <a href="perfil.php">mi perfil</a>
