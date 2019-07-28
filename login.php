@@ -4,31 +4,6 @@ require_once("autoload.php");
 $titulo = "Login";
 
 if($_POST){
-  $tipoConexion = "MYSQL";
-  // if($tipoConexion=="JSON"){
-  //     $usuario = new Usuario($_POST["email"],$_POST["password"]);
-  //     $errores= $validar->validacionLogin($usuario);
-  //     if(count($errores)==0){
-  //       $usuarioEncontrado = $json->buscarPorEmail($usuario->getEmail());
-  //       if($usuarioEncontrado == null){
-  //         $errores["email"]="Usuario no existe";
-  //       }else{
-  //         if(Autenticador::verificarPassword($usuario->getPassword(),$usuarioEncontrado["password"] )!=true){
-  //           $errores["password"]="Error en los datos verifique";
-  //         }else{
-  //           Autenticador::seteoSesion($usuarioEncontrado);
-  //           if(isset($_POST["recordar"])){
-  //             Autenticador::seteoCookie($usuarioEncontrado);
-  //           }
-  //           if(Autenticador::validarUsuario()){
-  //             redirect("perfil.php");
-  //           }else{
-  //             redirect("registro.php");
-  //           }
-  //         }
-  //       }
-  //     }
-  // }else{
 
   //Se instancia a un nuevo usuario
       $usuario = new Usuario($_POST["email"],$_POST["password"]);
@@ -88,11 +63,14 @@ require_once("php/head.php");
                   <?php endforeach;?>
               </ul>
             <?php endif;?>
+
           <form class="registro" action="login.php" method="post">
             <label for="email">Email*</label>
-          <input name="email" type="text" id="email"   value="<?=isset($errores["email"])? "":inputUsuario("email") ;?>" />
+            <input name="email" type="text" id="email"   value="<?=isset($errores["email"])? "":inputUsuario("email") ;?>"/>
+
             <label for="password">Contraseña*</label>
-          <input name="password" type="password" id="password"  value="" />
+            <input name="password" type="password" id="password"  value=""/>
+
             <button class="btn-formulario" type="submit" name="submit">iniciar sesión</button>
             <div class="recordar">
               <input name="recordarme" type="checkbox" id="check1" value="recordarme">

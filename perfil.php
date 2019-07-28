@@ -1,4 +1,5 @@
 <?php
+$titulo = "Mi Perfil";
 require_once("autoload.php");
 if(!isset($_SESSION["email"])) {
     redirect("registro.php");
@@ -21,7 +22,7 @@ require_once("php/head.php");
       <img src="img/img_perfil/<?=$_SESSION["avatar"];?>" alt="Avatar" >
       </p>
      <p>
-     
+
      </p>
       <a href="logout.php">Cerrar Sesión</a>
       </article>
