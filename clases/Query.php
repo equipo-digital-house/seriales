@@ -1,41 +1,92 @@
 <?php
 class Query{
     static public function listado($pdo,$tabla){
-        //Aquí ejecuto la consulta deseada, para mostrar algunos campos del usuario
-        $sql="select $tabla.id, $tabla.name, $tabla.email from $tabla";
-        //Aquí ejecuto el prepare de la sentencia, noten que lo estoy ejecutando de forma directa haciendo uso del método query de la clase PDO, es para que vean que se puede trabajar de diferentes formas
+        $sql="SELECT $tabla.id, $tabla.name, $tabla.email FROM $tabla";
         $consulta= $pdo->query($sql);
-        //Aquí ejecuto la consulta que tengo preparada, para así traer todos los usuarios registrados y almacenarlos en la variable $listado, la cual retorno
         $listado=$consulta->fetchall(PDO::FETCH_ASSOC);
         return $listado;
     }
+
+
     static public function mostrarUsuario($pdo,$tabla,$idUsuario){
-        //En esta otra consulta hago uso del statement que ofrece PDO
-        $sql = "select $tabla.id, $tabla.name, $tabla.email, $tabla.avatar,$tabla.role from $tabla where $tabla.id = '$idUsuario'";
-        //Aquí hago el prepare de los datos de mi consulta (Query)
+        $sql = "SELECT $tabla.id, $tabla.name, $tabla.email, $tabla.avatar,$tabla.role FROM $tabla WHERE $tabla.id = '$idUsuario'";
         $query = $pdo->prepare($sql);
-        //Aquí ejecuto la consulta
         $query->execute();
-        //Aquí hago uso del método fetchAll, pero también puedo usar sólo el métodp fetch, ya que sólo voy a buscar al usuario que cumpla con la condificón indicada 
         $usuarioEncontrado=$query->fetchAll(PDO::FETCH_ASSOC);
-        //Retorno el array sólo del usuario encontrado
         return $usuarioEncontrado;
     }
+
+
     static public function borrarUsuario($pdo,$tabla,$idUsuario){
-        //Aquí armo el query que deseo, en este caso es el borrado de un usuario específico
-        $sql="delete from $tabla where $tabla.id=:id";
-        //Aquí preparo la consulta, tal como me lo indica la secuencia de trabajar con PDO
+        $sql="DELETE FROM $tabla WHERE $tabla.id=:id";
         $query=$pdo->prepare($sql);
-        //Aquí vean que ejecuto el Bindeo de Parámetros - usando el bindValue
         $query->bindValue(':id',$idUsuario);
-        //Aquí ejecuto el borrado del usuario
         $query->execute();
     }
+
+
     static public function usuarioModificar($pdo,$tabla,$idUsuario){
-        $sql = "select $tabla.id, $tabla.name, $tabla.email, $tabla.role from $tabla where $tabla.id = '$idUsuario'";
+        $sql = "SELECT $tabla.id, $tabla.name, $tabla.email, $tabla.role from $tabla WHERE $tabla.id = '$idUsuario'";
         $query = $pdo->prepare($sql);
         $query->execute();
         $usuarioModificar=$query->fetch(PDO::FETCH_ASSOC);
         return $usuarioModificar;
+    }
+
+
+    static public function listarPreguntasFrecuentes($pdo, $tabla){
+        $sql="SELECT $tabla.id, $tabla.name, $tabla.answer FROM $tabla";
+        $consulta = $pdo->query($sql);
+        $listado = $consulta->fetchall(PDO::FETCH_ASSOC);
+        return $listado;
+    }
+
+
+    public static function mostrarPreguntaFrecuente($pdo, $tabla, $id)
+    {
+        $sql = "SELECT * FROM $tabla WHERE id = $id";
+        $query = $pdo->prepare($sql);
+        $query->execute();
+        $resultados = $query->fetch(PDO::FETCH_ASSOC);
+        return $resultados;
+    }
+
+
+    public static function insertarPreguntaFrecuente($preguntaFrecuente, $pdo)
+    {
+        $name = $pelicula->getName();
+        $answer = $pelicula->getAnswer();
+        $stmt = $pdo->prepare("INSERT INTO frequentquestions (name, answer) VALUES (:name, :answer)");
+        $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+        $stmt->bindParam(':answer', $answer, PDO::PARAM_STR);
+        $stmt->execute();
+    }
+
+
+    public static function actualizarPreguntaFrecuente($data, $pdo)
+    {
+        $columns = ["name","answer"];
+        $params = [];
+        $setStr = "";
+
+        foreach ($columns as $column) {
+            if (isset($data[$column]) && $column != "id") {
+                $setStr .= "`$column` = :$column,";
+                $params[$column] = $data[$column];
+            }
+        };
+
+        $setStr = rtrim($setStr, ",");
+        $params['id'] = $data['id'];
+        $pdo->prepare("UPDATE frequentquestions SET $setStr WHERE id = :id")->execute($params);
+    }
+
+
+    static public function eliminarPreguntaFrecuente($pdo, $tabla, $preguntaFrecuente){
+
+        $sql = "DELETE FROM $tabla WHERE title = :frequentquestions";
+        $stmt= $pdo->prepare($sql);
+        $stmt->bindValue(':preguntaFrecuente', $preguntaFrecuente);
+        $stmt->execute();
     }
 }

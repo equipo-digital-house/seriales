@@ -14,12 +14,8 @@ require_once("clases/PreguntaFrecuente.php");
 //Declaro mis variables
 $host = "localhost";
 $bd = "seriales_db";
-$usuario = "root";
-<<<<<<< HEAD
-$password = "aldana";
-=======
-$password = "root";
->>>>>>> 1bc85f69be903c4a631506ad413eeaf224f578f7
+$usuario = "";
+$password = "";
 $puerto = "3306";
 $charset = "utf8mb4";
 
