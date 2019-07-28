@@ -2,11 +2,12 @@
 require_once("autoload.php");
 if($_POST){
   $preguntaFrecuente = new PreguntaFrecuente($_POST['name'], $_POST['answer']);
-  BaseMySQL::guardarPreguntaFrecuente($pdo, 'frequentquestions',$preguntaFrecuente);
-  redirect("administradorPreguntasFrecuentes.php");
+
+  Query::insertarPreguntaFrecuente($preguntaFrecuente, $pdo);
+
 }
 
-    $preguntasFrecuentes = Query::listarPreguntasFrecuentes($pdo, 'frequentquestions');
+$preguntasFrecuentes = Query::listarPreguntasFrecuentes($pdo, 'frequentquestions');
  ?>
 
 
@@ -81,10 +82,10 @@ if($_POST){
                   <?= $pregunta['answer'];?>
               </td>
               <td>
-                  <a href="editarPreguntaFrecuente.php?id=">Editar</a>
+                  <a href="editarPreguntaFrecuente.php?id=<?=$preguntaFrecuente['id'];?>">Editar</a>
               </td>
               <td>
-                  <a href="eliminarPreguntaFrecuente.php">Eliminar</a>
+                  <a href="eliminarPreguntaFrecuente.php?id=<?=$preguntaFrecuente['id'];?>">Eliminar</a>
               </td>
 
           </tr>

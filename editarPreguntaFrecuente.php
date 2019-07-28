@@ -1,9 +1,7 @@
 <?php
 require_once("autoload.php");
 
-$preguntaFrecuente = Query::listarPreguntasFrecuentes($pdo, 'frequentquestions');
-
-$id = $preguntaFrecuente["id"];
+$id = $_GET["id"];
 
 $preguntaFrecuente = Query::mostrarPreguntaFrecuente($pdo, 'frequentquestions', $id);
 

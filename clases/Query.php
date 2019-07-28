@@ -44,7 +44,7 @@ class Query{
 
     public static function mostrarPreguntaFrecuente($pdo, $tabla, $id)
     {
-        $sql = "SELECT * FROM $tabla WHERE id = $id";
+        $sql = "SELECT FROM $tabla WHERE id = $id";
         $query = $pdo->prepare($sql);
         $query->execute();
         $resultados = $query->fetch(PDO::FETCH_ASSOC);
@@ -54,8 +54,8 @@ class Query{
 
     public static function insertarPreguntaFrecuente($preguntaFrecuente, $pdo)
     {
-        $name = $pelicula->getName();
-        $answer = $pelicula->getAnswer();
+        $name = $preguntaFrecuente->getName();
+        $answer = $preguntaFrecuente->getAnswer();
         $stmt = $pdo->prepare("INSERT INTO frequentquestions (name, answer) VALUES (:name, :answer)");
         $stmt->bindParam(':name', $name, PDO::PARAM_STR);
         $stmt->bindParam(':answer', $answer, PDO::PARAM_STR);
