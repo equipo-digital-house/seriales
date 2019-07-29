@@ -35,7 +35,7 @@ class Query{
 
 
     static public function listarPreguntasFrecuentes($pdo, $tabla){
-        $sql="SELECT $tabla.id, $tabla.name, $tabla.answer FROM $tabla";
+        $sql="SELECT * FROM $tabla";
         $consulta = $pdo->query($sql);
         $listado = $consulta->fetchall(PDO::FETCH_ASSOC);
         return $listado;
@@ -44,7 +44,7 @@ class Query{
 
     public static function mostrarPreguntaFrecuente($pdo, $tabla, $id)
     {
-        $sql = "SELECT FROM $tabla WHERE id = $id";
+        $sql = "SELECT * FROM $tabla WHERE id = $id";
         $query = $pdo->prepare($sql);
         $query->execute();
         $resultados = $query->fetch(PDO::FETCH_ASSOC);
