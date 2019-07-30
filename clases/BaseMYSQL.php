@@ -111,6 +111,8 @@ class BaseMYSQL extends BaseDatos{
         $setStr = rtrim($setStr, ",");
         $params['id'] = $data['id'];
         $pdo->prepare("UPDATE users SET $setStr WHERE id = :id")->execute($params);
+
+        return "ok";
     }
 
     public function leer(){
