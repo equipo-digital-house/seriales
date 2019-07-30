@@ -63,30 +63,19 @@ class Query{
     }
 
 
-    public static function actualizarPreguntaFrecuente($data, $pdo)
-    {
-        $columns = ["name","answer"];
-        $params = [];
-        $setStr = "";
-
-        foreach ($columns as $column) {
-            if (isset($data[$column]) && $column != "id") {
-                $setStr .= "`$column` = :$column,";
-                $params[$column] = $data[$column];
-            }
-        };
-
-        $setStr = rtrim($setStr, ",");
-        $params['id'] = $data['id'];
-        $pdo->prepare("UPDATE frequentquestions SET $setStr WHERE id = :id")->execute($params);
+    static public function actualizarPreguntaFrecuente($pdo, $idPregunta, $datos){
+      $name = $datos["name"];
+      $answer = $datos["answer"];
+      $sql = "UPDATE frequentquestions SET frequentquestions.name = '$name', frequentquestions.answer = '$answer' where frequentquestions.id = $idPregunta";
+      $query = $pdo->prepare($sql);
+      $query->execute();
     }
 
 
-    static public function eliminarPreguntaFrecuente($pdo, $tabla, $preguntaFrecuente){
+    static public function eliminarPreguntaFrecuente($pdo, $tabla, $idPregunta){
 
-        $sql = "DELETE FROM $tabla WHERE title = :frequentquestions";
-        $stmt= $pdo->prepare($sql);
-        $stmt->bindValue(':preguntaFrecuente', $preguntaFrecuente);
-        $stmt->execute();
+        $sql = "DELETE FROM frequentquestion WHERE frequentquestion.id = $idPregunta";
+        $query = $pdo->prepare($sql);
+        $query->execute();
     }
 }
