@@ -139,6 +139,10 @@ main {
 
 /*parte de Aldi*/
 
+#answer{
+  margin-left: 0;
+}
+
 .error{
   font-size: 1rem;
   color: white;

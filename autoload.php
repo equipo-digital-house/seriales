@@ -15,7 +15,7 @@ require_once("clases/PreguntaFrecuente.php");
 $host = "localhost";
 $bd = "seriales_db";
 $usuario = "root";
-$password = "root";
+$password = "aldana";
 $puerto = "3306";
 $charset = "utf8mb4";
 

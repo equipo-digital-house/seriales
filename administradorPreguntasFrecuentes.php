@@ -1,13 +1,13 @@
 <?php
 require_once("autoload.php");
+
 if($_POST){
   $preguntaFrecuente = new PreguntaFrecuente($_POST['name'], $_POST['answer']);
-  BaseMySQL::guardarPreguntaFrecuente($pdo, 'frequentquestions',$preguntaFrecuente);
-  redirect("administradorPreguntasFrecuentes.php");
-  var_dump($preguntaFrecuente);
-  exit;
+
+Query::insertarPreguntaFrecuente($preguntaFrecuente, $pdo);
 }
 
+$preguntasFrecuentes = Query::listarPreguntasFrecuentes($pdo, 'frequentquestions');
  ?>
 
 
@@ -23,11 +23,13 @@ if($_POST){
 
      <div class="container-fluid">
 
+<!--Formulario para agregar preguntas frecuentes-->
+
        <section class="formulario">
          <div id="formContainer" class="row align-items-center">
             <div class="col-sm-10 offset-md-1">
 
-            <h1>Administrador de preguntas frecuentes</h1>
+            <h2 class="text-center">Administrador de preguntas frecuentes</h2>
 
             <form id="formulario"  class="form" name="preguntasFrecuentes" novalidate action=""  method="POST">
 
@@ -38,11 +40,63 @@ if($_POST){
 
             <div class="form-group">
             <label for="answer">Respuesta</label>
-            <input required name="answer" type="text" class="form-control" id="answer" placeholder="Respuesta" value="">
+            <textarea name="answer" rows="8" cols="80" id="answer" class="row align-items-left"></textarea>
             </div>
 
             <button type="submit" class="btn btn-primary">Guardar</button>
             </form>
+
+
+<!--Listado de preguntas frecuentes-->
+
+<div class="spacer"></div>
+  <h2 class="text-center">Listado de preguntas frecuentes</h2>
+  <div class="spacer"></div>
+  <table class="table">
+      <thead>
+          <tr>
+              <th>
+                  Pregunta
+              </th>
+              <th>
+                  Respuesta
+              </th>
+              <!-- <th>
+                  Ver
+              </th> -->
+              <th>
+                  Editar
+              </th>
+              <th>
+                  Eliminar
+              </th>
+          </tr>
+      </thead>
+      <tbody>
+          <?php foreach ($preguntasFrecuentes as $key => $pregunta) :?>
+          <tr>
+              <td>
+                  <?= $pregunta['name'];?>
+              </td>
+              <td>
+                  <?= $pregunta['answer'];?>
+              </td>
+              <td>
+                  <a href="editarPreguntaFrecuente.php?id=<?=$pregunta['id']?>">Editar</a>
+              </td>
+              <td>
+                  <a href="eliminarPreguntaFrecuente.php?id=<?=$pregunta['id']?>">Eliminar</a>
+              </td>
+
+          </tr>
+          <?php endforeach;?>
+
+
+      </tbody>
+
+  </table>
+
+
 
             </div>
          </div>

@@ -1,13 +1,24 @@
 <?php
 class PreguntaFrecuente{
+  private $id;
   private $name;
   private $answer;
 
 
-public function __construct($name, $answer){
+public function __construct($name, $answer, $id = null){
+$this->id = $id;
 $this->name = $name;
 $this->answer = $answer;
 }
+
+public function getId(){
+  return $this->id;
+}
+
+public function setId($id){
+  $this->id = $id;
+}
+
 
 public function getName(){
   return $this->name;
