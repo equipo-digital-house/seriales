@@ -115,31 +115,6 @@ class BaseMYSQL extends BaseDatos{
         return "ok";
     }
 
-    // static public function modificarUsuario($data, $pdo, $tabla, $avatar, $seleccion, $dataModificada) {
-    //   $nombre = $data['name'];
-    //   $email = $data['email'];
-    //   $id = $data['id'];
-    //   $password = $data['password'];
-    //
-    //   switch($seleccion) {
-    //     case 1 :
-    //     $nombre = $dataModificada["nombre"];
-    //     $email = $dataModificada["email"];
-    //     $sql = "UPDATE $tabla SET name = :name, email = :email
-    //     WHERE $tabla.id= :id";
-    //     break;
-    //
-    //     case 2 :
-    //     $sql = "UPDATE $tabla SET avatar = :avatar WHERE $tabla.id = :id";
-    //     break;
-    //
-    //     case 3 :
-    //     $password= Encriptar::hashPassword($dataModificada["password"]);
-    //     $sql = "UPDATE $table SET password = :password WHERE $tabla.id = :id";
-    //     break;
-    //   }
-    // }
-
     public function leer(){
         //A futuro trabajaremos en esto
     }
