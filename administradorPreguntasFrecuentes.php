@@ -35,7 +35,7 @@ $preguntasFrecuentes = Query::listarPreguntasFrecuentes($pdo, 'frequentquestions
 
             <div class="form-group">
             <label for="name">Pregunta</label>
-            <input required name="name" type="text" class="form-control" id="name" placeholder="Pregunta" value="">
+            <input required name="name" type="text" class="form-control" id="name" placeholder="Pregunta">
             </div>
 
             <div class="form-group">

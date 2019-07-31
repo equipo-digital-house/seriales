@@ -4,7 +4,7 @@ require_once("autoload.php");
 
 $titulo = "Preguntas Frecuentes";
 
-$preguntas // LLAMAR A LA BASE DE DATOS PARA TRAERTE UN ARRAY CON ALL
+$preguntasFrecuentes = Query::listarPreguntasFrecuentes($pdo, 'frequentquestions');
  ?>
 
 <!DOCTYPE html>
@@ -23,29 +23,30 @@ require_once("php/head.php");
         <section class="preguntas-frecuentes">
           <div class="accordion" id="accordionExample">
             <?php
-            require_once('php/baseDatos.php');
-            foreach ($preguntas as $key):?>
+            foreach ($preguntasFrecuentes as $key => $pregunta):?>
                     <div class="card">
                       <?php
                       $card="collapse";
-                      $card=($key["Numero"]!="#1")?"collapse":"collapse";?>
+                      $card=($pregunta["id"]!="#1")?"collapse":"collapse";
+                      ?>
+
                       <!-- BORRAR EL NUMERAL DEL 1 LINEA 29 -->
                       <!-- REVISAR IF TERNARIO LINEA 29, TAL VEZ NO HACE FALTA -->
                       <div class="card-header" id="headingOne">
                         <h2 class="mb-0">
-                          <button class="font-preguntas btn btn-link" type="button" data-toggle="collapse" data-target="<?= $key["Target"]?>" aria-expanded="true" aria-controls="<?= $key["idCollapse"]?>">
-                            <!-- DEJAR IGUAL EL IDCOLLAPSE -->
-                                 <?=$key["Numero"]?>
-                                 <!--  CAMBIAR NUMERO POR ID-->
-                                 <?=$key["Nombre"]?>
+                          <button class="font-preguntas btn btn-link" type="button" data-toggle="collapse" data-target="<?= $pregunta["Target"]?>" aria-expanded="true" aria-controls="<?= $pregunta["idCollapse"]?>">
+                            <!-- DEJAR IGUAL EL IDCOLLAPSE --> -->
+                                 <!-- <?=$pregunta[""]?> -->
+                                 <!--  CAMBIAR NUMERO POR ID
+                                 <?=$pregunta["name"]?>
                                  <!-- CAMBIAR NOMBRE POR NAME -->
                           </button>
                         </h2>
                       </div>
 
-                  <div id="<?= $key["idCollapse"]?>" class="<?=$card?>" aria-labelledby="headingOne" data-parent="#accordionExample">
+                  <div id="<?= $pregunta["idCollapse"]?>" class="<?=$card?>" aria-labelledby="headingOne" data-parent="#accordionExample">
                       <div class="card-body">
-                          <?=$key["Descripcion"]?>
+                          <?=$pregunta["answer"]?>
                           <!-- CAMBIAR DESCRIPCION POR ANSWER -->
                       </div>
                     </div>

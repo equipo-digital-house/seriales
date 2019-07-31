@@ -1,13 +1,17 @@
 <?php
 require_once("autoload.php");
 
-$id = $_GET["id"];
+if(isset($_GET["id"])){
+  $idPreguntaFrecuente = $_GET["id"];
 
-$preguntaFrecuente = Query::mostrarPreguntaFrecuente($pdo, 'frequentquestions', $id);
+$preguntaFrecuente = Query::mostrarPreguntaFrecuente($pdo, 'frequentquestions', $idPreguntaFrecuente);
 
-if($_POST) {
-    Query::actualizarPreguntaFrecuente($_POST, $pdo);
-    header('Location: administradorPreguntasFrecuentes.php?id=' . $id);
+}
+
+if($_POST){
+$idPreguntaFrecuente = $_GET["id"];
+$actualizarPreguntaFrecuente = Query::actualizarPreguntaFrecuente($pdo, $idPreguntaFrecuente, $_POST);
+header('Location:administradorPreguntasFrecuentes.php');
 }
 
 
@@ -38,11 +42,12 @@ if($_POST) {
                       </div>
 
                     <div class="form-group">
-                        <label for="respuesta">Respuesta</label>
-                        <input type="text" class="form-control" name="name" value="<?=$preguntaFrecuente['answer'] ?>">
+
+                        <label for="pregunta">Respuesta</label>
+                        <textarea for="respuesta" name="answer" rows="8" cols="80" class="form-control"><?=$preguntaFrecuente['answer']?></textarea>
                     </div>
 
-                    <button type="submit" class="btn btn-danger">Modificar pregunta frecuente</button>
+                    <button type="submit" name="modificar" class="btn btn-danger">Modificar pregunta frecuente</button>
                 </form>
                 <a href="administradorPreguntasFrecuentes.php">Volver</a>
             </div>
