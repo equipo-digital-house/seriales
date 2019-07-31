@@ -11,7 +11,7 @@ $preguntaFrecuente = Query::mostrarPreguntaFrecuente($pdo, 'frequentquestions', 
 if(isset($_POST["borrar"])){
   $idPreguntaFrecuente = $_GET["id"];
 
-  Query::eliminarPreguntaFrecuente($pdo, 'frequentquestions', $idPreguntaFrecuente);
+  Query::eliminarPreguntaFrecuente($pdo, $idPreguntaFrecuente);
   header('Location:administradorPreguntasFrecuentes.php');
   exit;
 }elseif (isset($_POST["no"])){

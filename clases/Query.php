@@ -72,9 +72,9 @@ class Query{
     }
 
 
-    static public function eliminarPreguntaFrecuente($pdo, $tabla, $idPregunta){
+    static public function eliminarPreguntaFrecuente($pdo, $idPregunta){
 
-        $sql = "DELETE FROM frequentquestion WHERE frequentquestion.id = $idPregunta";
+        $sql = "DELETE FROM frequentquestions WHERE frequentquestions.id = $idPregunta";
         $query = $pdo->prepare($sql);
         $query->execute();
     }

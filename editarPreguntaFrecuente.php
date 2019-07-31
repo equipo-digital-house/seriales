@@ -11,6 +11,7 @@ $preguntaFrecuente = Query::mostrarPreguntaFrecuente($pdo, 'frequentquestions', 
 if($_POST){
 $idPreguntaFrecuente = $_GET["id"];
 $actualizarPreguntaFrecuente = Query::actualizarPreguntaFrecuente($pdo, $idPreguntaFrecuente, $_POST);
+header('Location:administradorPreguntasFrecuentes.php');
 }
 
 
@@ -41,8 +42,9 @@ $actualizarPreguntaFrecuente = Query::actualizarPreguntaFrecuente($pdo, $idPregu
                       </div>
 
                     <div class="form-group">
-                        <label for="respuesta">Respuesta</label>
-                        <input type="text" class="form-control" name="answer" value="<?=$preguntaFrecuente['answer'] ?>">
+
+                        <label for="pregunta">Respuesta</label>
+                        <textarea for="respuesta" name="answer" rows="8" cols="80" class="form-control"><?=$preguntaFrecuente['answer']?></textarea>
                     </div>
 
                     <button type="submit" name="modificar" class="btn btn-danger">Modificar pregunta frecuente</button>
