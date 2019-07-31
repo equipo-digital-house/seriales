@@ -6,7 +6,6 @@ if(!isset($_SESSION["email"])) {
 }
 
 
-
 $avatar=null;
 
 $userSession= BaseMYSQL::buscarPorEmail($_SESSION["email"],$pdo,'users');

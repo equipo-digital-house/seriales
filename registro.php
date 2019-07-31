@@ -4,9 +4,9 @@ $titulo = "Registro";
 
 require_once("autoload.php");
 if ($_POST){
-
   //Se instancia un nuevo Usuario
-  $usuario = new Usuario($_POST["email"],$_POST["password"],$_POST["repassword"],$_POST["nombre"],$_FILES );
+  $avatar = "misterX.jpg";
+  $usuario = new Usuario($_POST["email"],$_POST["password"],$_POST["repassword"],$_POST["nombre"], $avatar );
   //Aquí verifico si los datos registrados por el usuario pasan las validaciones
   $errores = $validar->validacionUsuario($usuario, $_POST["repassword"]);
   //De no existir errores entonces:
@@ -17,7 +17,7 @@ if ($_POST){
       $errores["email"] = "Usuario ya registrado";
     }else{
       //Aquí guardo en el servidor la foto que el usuario seleccionó
-      $avatar = $registro->armarAvatar($usuario->getAvatar());
+      // $registro->armarAvatar($usuario->getAvatar());
       //Aquí procedo a guardar los datos del usuario en la base de datos, ,aquí le paso el objeto PDO, el objeto usuario, la tabla donde se va a guardar los datos y el nombre del archivo de la imagen del usuario.
       BaseMYSQL::guardarUsuario($pdo,$usuario,'users',$avatar);
       //Aquí redirecciono el usuario al login
@@ -70,9 +70,9 @@ require_once("php/head.php");
             <input name="repassword" type="password" id="repassword" value="" />
             <span class="error"><?=(isset($errores["repassword"]))? $errores["repassword"] :"";?></span>
 
-            <label for="avatar">Foto de tu perfil:</label>
+            <!-- <label for="avatar">Foto de tu perfil:</label>
             <input  type="file" name="avatar" value="">
-            <span class="error"><?=(isset($errores["avatar"]))? $errores["avatar"] :"";?></span>
+            <span class="error"><?=(isset($errores["avatar"]))? $errores["avatar"] :"";?></span> -->
 
             <button class="btn-formulario" type="submit" name="submit">¡Registrarme!</button>
           </form>

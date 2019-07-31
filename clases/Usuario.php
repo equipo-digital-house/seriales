@@ -43,6 +43,6 @@ class Usuario{
     public function setAvatar($avatar){
         $this->avatar = $avatar;
     }
-    
+
 }
 ?>

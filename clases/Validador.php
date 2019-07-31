@@ -30,18 +30,6 @@ class Validador{
           }
       }
 
-      if($usuario->getAvatar()!=null){
-        if($_FILES["avatar"]["error"]!=0){
-          $errores["avatar"] = "Por favor, sube una foto";
-        }else{
-          $nombre = $_FILES["avatar"]["name"];
-          $ext = pathinfo($nombre,PATHINFO_EXTENSION);
-          if($ext != "png" && $ext != "jpg"){
-          $errores["avatar"] = "La extensión de la imagen debe ser .png o .jpg";
-              }
-          }
-      }
-
       return $errores;
   }
 
