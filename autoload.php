@@ -14,12 +14,12 @@ require_once("clases/PreguntaFrecuente.php");
 //Declaro mis variables
 $host = "localhost";
 $bd = "seriales_db";
-$usuario = "root";
-$password = "aldana";
+$user = "root";
+$password = "root";
 $puerto = "3306";
 $charset = "utf8mb4";
 
-$pdo = BaseMYSQL::conexion($host,$bd,$usuario,$password,$puerto,$charset);
+$pdo = BaseMYSQL::conexion($host,$bd,$user,$password,$puerto,$charset);
 
 
 $validar = new Validador();

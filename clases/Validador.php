@@ -61,12 +61,12 @@ class Validador{
 
       $errores = [];
 
-      $email = trim($usuario->getEmail());
+      $email = trim($usuario['email']);
       if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
         $errores["email"] = "El correo ingresado es inválido";
       }
-      $password= trim($usuario->getPassword());
-      $repassword = trim($usuario->getRepassword());
+      $password= trim($usuario['password']);
+      $repassword = trim($usuario['repassword']);
 
 
       if(empty($password)){
@@ -74,7 +74,7 @@ class Validador{
       }elseif (strlen($password)<6) {
         $errores["password"] = "La contraseña debe tener seis caracteres como mínimo";
       }
-      if(empty($repassword)){
+      if(empty($repassword) || $password != $repassword){
         $errores["repassword"] = "Las contraseñas no coinciden";
       }
 

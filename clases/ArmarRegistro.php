@@ -29,4 +29,13 @@ class ArmarRegistro{
 
         return $usuario;
     }
+
+    public function armarRegistroOlvide($datos, $usuario){
+        if($datos["email"] == $usuario["email"]){
+        $usuario["password"] = $datos["password"];
+        $usuario["password"]= password_hash($datos["password"],PASSWORD_DEFAULT);
+        }
+
+        return $usuario;    
+    }
 }
