@@ -107,6 +107,11 @@ main {
   text-transform: uppercase;
 }
 
+.btn-cerrar {
+  color: #f34473;
+  font-family: 'Lato', sans-serif;
+}
+
 .recordar {
   display: flex;
   justify-content: flex-end;
@@ -440,20 +445,17 @@ color: black;
 }
 .card-body{
 text-align: left;
-font-family: Verdana, cursive;
+font-family: 'Lato', sans-serif;
 }
 
 .font-preguntas{
   text-decoration: none;
-  font-family: 'Righteous', cursive;
+  font-family: 'Lato', sans-serif;
   text-align: left;
   color: white;
 
 }
 .font-preguntas:hover{
-  text-decoration: none;
-  font-family: 'Righteous', cursive;
-  text-align: left;
   color: #75cac3;
 
 }
