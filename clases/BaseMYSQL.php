@@ -46,54 +46,6 @@ class BaseMYSQL extends BaseDatos{
 
     }
 
-
-    static public function modificarDatosUsuario($data, $pdo, $tabla) {
-      $nombre = $data['name'];
-      $email = $data['email'];
-      $id = $data['id'];
-
-      $sql = "UPDATE $tabla SET name = :name, email = :email
-      WHERE $tabla.id= :id";
-
-      $query = $pdo->prepare($sql);
-
-      $query->execute(
-        [
-          ":name" => $nombre,
-          ":email" => $email,
-          ":id" => $id
-        ]);
-    }
-
-    static public function modificarAvatar($data, $pdo, $tabla, $avatar) {
-      $id = $data['id'];
-
-      $sql = "UPDATE $tabla SET avatar = :avatar WHERE $tabla.id = :id";
-
-      $query = $pdo->prepare($sql);
-
-      $query->execute(
-        [
-          ":avatar" => $avatar,
-          ":id" => $id
-        ]);
-    }
-
-    static public function modificarPassword($data, $pdo, $tabla) {
-      $password = $data['password'];
-      $id = $data['id'];
-
-      $sql = "UPDATE $table SET password = :password WHERE $tabla.id = :id";
-
-      $query = $pdo->prepare($sql);
-
-      $query->execute(
-        [
-          ":password" => $password,
-          ":id" => $id
-        ]);
-    }
-
     public static function actualizarUsuario($data, $pdo, $avatar)
     {
 
@@ -112,7 +64,9 @@ class BaseMYSQL extends BaseDatos{
         $params['id'] = $data['id'];
         $pdo->prepare("UPDATE users SET $setStr WHERE id = :id")->execute($params);
 
-        return "ok";
+        $mensaje = "ok";
+
+        return $mensaje;
     }
 
     static public function buscarPorSerie($serie,$pdo,$tabla){

@@ -16,12 +16,18 @@ require_once("clases/Answer.php");
 //Declaro mis variables
 $host = "localhost";
 $bd = "seriales_db";
+<<<<<<< HEAD
 $usuario = "root";
 $password = "Blur0329";
 $puerto = "3308";
+=======
+$user = "root";
+$password = "root";
+$puerto = "3306";
+>>>>>>> 0c5367530abd0a4b0744d6cdc9504b8a99356bcd
 $charset = "utf8mb4";
 
-$pdo = BaseMYSQL::conexion($host,$bd,$usuario,$password,$puerto,$charset);
+$pdo = BaseMYSQL::conexion($host,$bd,$user,$password,$puerto,$charset);
 
 
 $validar = new Validador();
