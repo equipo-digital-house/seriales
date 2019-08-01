@@ -9,14 +9,16 @@ require_once("clases/Autenticador.php");
 require_once("clases/BaseMYSQL.php");
 require_once("clases/Query.php");
 require_once("clases/PreguntaFrecuente.php");
-
+require_once("clases/Serie.php");
+require_once("clases/Question.php");
+require_once("clases/Answer.php");
 
 //Declaro mis variables
 $host = "localhost";
 $bd = "seriales_db";
 $usuario = "root";
-$password = "aldana";
-$puerto = "3306";
+$password = "Blur0329";
+$puerto = "3308";
 $charset = "utf8mb4";
 
 $pdo = BaseMYSQL::conexion($host,$bd,$usuario,$password,$puerto,$charset);

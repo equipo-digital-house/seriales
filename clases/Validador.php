@@ -166,4 +166,56 @@ class Validador{
   <?php endif;?>
   <?php
   }
+  public function validacionSerie($serie){
+
+      $errores=array();
+      $nombreSerie = trim($serie->getNombre());
+      if(isset($nombre)) {
+          if(empty($nombre)){
+              $errores["nombre"]= "El campo nombre de serie no debe estar vacio";
+          }
+      }
+
+      if($serie->getAvatar()!=null){
+          if($_FILES["avatar"]["error"]!=0){
+              $errores["avatar"]="Error debe subir imagen";
+          }else{
+              $nombre = $_FILES["avatar"]["name"];
+              $ext = pathinfo($nombre,PATHINFO_EXTENSION);
+              if($ext != "png" && $ext != "jpg"){
+                  $errores["avatar"]="Debe seleccionar archivo png ó jpg";
+              }
+          }
+      }
+
+      return $errores;
+  }
+  public function validacionPregunta($pregunta){
+
+      $errores=array();
+      $nombre = trim($pregunta->getName());
+      if(isset($nombre)) {
+          if(empty($nombre)){
+              $errores["nombre"]= "El campo pregunta de serie no debe estar vacio";
+          }
+      }
+
+      if($pregunta->getImage()!=null){
+          if($_FILES["filePregunta"]["error"]!=0){
+              $errores["filePregunta"]="Error debe subir imagen";
+          }else{
+            if($pregunta->getImage())
+              $nombre = $_FILES["filePregunta"]["name"];
+              $ext = pathinfo($nombre,PATHINFO_EXTENSION);
+              if($ext != "png" && $ext != "jpg"){
+                  $errores["avatar"]="Debe seleccionar archivo png ó jpg";
+              }
+          }
+      }
+
+      return $errores;
+  }
+
+
+
 }
