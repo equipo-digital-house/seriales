@@ -12,7 +12,7 @@ class Autenticador{
 
         $_SESSION["name"]= $user["name"];
         $_SESSION["email"] = $user["email"];
-        $_SESSION["role"]= $user["role"];
+        $_SESSION["access"]= $user["access"];
         $_SESSION["avatar"]= $user["avatar"];
     }
     static public function seteoCookie($user){

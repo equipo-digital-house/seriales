@@ -146,6 +146,16 @@ class Validador{
     return $errores;
   }
 
+  public function validarEmail($email, $usuarioAModificar) {
+    $errores = [];
+    $email = trim($email);
+    if(!filter_var($email, FILTER_VALIDATE_EMAIL) || !$usuarioAModificar){
+      $errores["email"] = "El correo ingresado es inválido";
+    }
+
+    return $errores;
+  }
+
  //Muestra si hubo errores o si la modificacion del perfil fue correcta.
   public function mostrarErrores($errores, $accion) {
     if(count($errores) != 0):?>

@@ -208,6 +208,15 @@ main {
   border-radius: 10px;
 }
 
+.admin-button{
+  right: 2%;
+  position: absolute;
+}
+
+.admin-button a {
+  color:grey;
+}
+
 .saludo {
   color: #F34573;
   padding: 0 10px;;
@@ -504,6 +513,7 @@ font-family: 'Lato', sans-serif;
   .avatar{
   display: flex;
   flex-direction: row;
+  justify-content: center;
 
   }
   .avatar img{
