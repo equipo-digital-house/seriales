@@ -150,7 +150,6 @@ main {
 
 * {
   box-sizing: border-box;
-  margin: 0 auto;
   padding: 0;
 }
 
@@ -255,8 +254,6 @@ main {
   width: 100%;
   height: 100%;
   border-radius: 6px;
-  /*background-image: url(img-Aldi/LaCasaDePapel1.jpg);
-  background-size: cover;*/
   }
 
   /*Media queries*/
@@ -430,19 +427,19 @@ main {
 main .main-pf {
   padding: 30px;
   background-image: url(../img/bg-seriales.png);
-
 }
 
 .preguntas-frecuentes{
 width:80%;
 margin: 0 auto;
 }
+
 .card-header{
 width: 100%;
 background-color: #f34573;
 color: black;
-
 }
+
 .card-body{
 text-align: left;
 font-family: 'Lato', sans-serif;
@@ -450,11 +447,11 @@ font-family: 'Lato', sans-serif;
 
 .font-preguntas{
   text-decoration: none;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Righteous', sans-serif;
   text-align: left;
   color: white;
-
 }
+
 .font-preguntas:hover{
   color: #75cac3;
 
@@ -511,4 +508,47 @@ font-family: 'Lato', sans-serif;
   }
   .avatar img{
     border:1px solid #75cac3;
+  }
+
+  /*Administrador preguntas frecuentes*/
+
+  .tituloAdminFaq1, .tituloAdminFaq2, .tituloAdminFaq3, .eliminarPreguntaFrecuente{
+    font-family: 'Righteous', sans-serif;
+    color: white;
+    padding: 0.2rem;
+    background-color: #f34573;
+    text-align: center;
+    font-size: 1.5rem;
+  }
+
+  .formulario form{
+    margin-bottom: 2rem;
+  }
+
+  td {
+    border: 1px solid grey;
+  }
+
+  th:first-child, td:first-child {
+    border-left: none;
+  }
+
+  th:last-child, td:last-child{
+    border-right: none;
+  }
+
+  .guardarFaq, .modificarFaq, .eliminarFaq {
+    background-color: #75cac3;
+    color: white;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 5px;
+  }
+
+  .fas {
+    color: #75cac3;
+  }
+
+  .flechaVolver{
+    font-size: 40px;
   }
