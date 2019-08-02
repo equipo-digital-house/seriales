@@ -55,6 +55,8 @@ if($_POST){
             <button class="guardarFaq" type="submit" class="btn">Guardar</button>
             </form>
 
+            <a class="nav-link" href="administrador.php"><i class="fas fa-arrow-circle-left" alt="Retornar"></i>Retornar</a>
+
 
 <!--Listado de preguntas frecuentes-->
 

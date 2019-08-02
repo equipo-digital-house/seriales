@@ -65,7 +65,7 @@ $cont=1;
 
   <ul class="nav justify-content-end">
   <li class="nav-item">
-    <a class="nav-link" href="perfil.php"><i class="fas fa-arrow-circle-left" alt="Retornar"></i>Retornar</a>
+    <a class="nav-link" href="administrador.php"><i class="fas fa-arrow-circle-left" alt="Retornar"></i>Retornar</a>
   </li>
 
   <li class="nav-item">

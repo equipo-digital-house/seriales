@@ -12,7 +12,7 @@
               <button class="btn btn-primary my-2 my-sm-0" type="submit">Buscar</button>
             </form>
             <a class="nav-item nav-link active text-light" href="administrador.php">Home<span class="sr-only">(current)</span></a>
-             <a class="nav-item nav-link text-light" href="p.php">Usuarios</a>
+             <a class="nav-item nav-link text-light" href="acceso.php">Accesos</a>
             <li class="nav-item dropdown">
        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
          Series
