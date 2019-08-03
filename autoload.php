@@ -17,7 +17,7 @@ require_once("clases/Answer.php");
 $host = "localhost";
 $bd = "seriales_db";
 $user = "root";
-$password = "root";
+$password = "aldana";
 $puerto = "3306";
 $charset = "utf8mb4";
 

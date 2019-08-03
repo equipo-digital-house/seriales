@@ -27,16 +27,20 @@ $preguntasFrecuentes = Query::listarPreguntasFrecuentes($pdo, 'frequentquestions
           foreach ($preguntasFrecuentes as $pregunta):?>
 
           <?php
-          $ariaExpanded = ($pregunta["id"] != 1)?"false":"true";
-          $collapseShow = ($pregunta["id"] != 1)?"collapse":"collapse show";
+          // $ariaExpanded = ($pregunta["id"] != 1)?"false":"true";
+          // $collapseShow = ($pregunta["id"] != 1)?"collapse":"collapse show";
+
+          $idCollapse = "collapse".$pregunta["id"];
+          $target = "#collapse".$pregunta["id"];
+          $card=($pregunta["id"]=="1")?"collapse":"collapse";
            ?>
 
 
           <div class="card">
 
-          <div class="card-header" id="heading".<?=$pregunta["id"]?>>
+          <div class="card-header" id="headingOne">
           <h2 class="mb-0">
-          <button class="font-preguntas btn btn-link" type="button" data-toggle="collapse" data-target="#collapse".<?=$pregunta["id"]?> aria-expanded="<?=$ariaExpanded?>" aria-controls="collapse".<?=$pregunta["id"]?>>
+          <button class="font-preguntas btn btn-link" type="button" data-toggle="collapse" data-target="<?=$target?>" aria-expanded="true" aria-controls="<?=$idCollapse?>">
 
             <?=$pregunta["name"]?>
 
@@ -45,8 +49,8 @@ $preguntasFrecuentes = Query::listarPreguntasFrecuentes($pdo, 'frequentquestions
           </div>
 
 
-          <div id="collapse".<?=$pregunta["id"]?> class="<?=$collapseShow?>"
-            aria-labelledby="heading".<?=$pregunta["id"]?> data-parent="#accordion">
+          <div id="<?=$idCollapse?>" class="<?=$card?>"
+            aria-labelledby="headingOne" data-parent="#accordion">
 
             <div class="card-body">
               <?=$pregunta["answer"]?>
