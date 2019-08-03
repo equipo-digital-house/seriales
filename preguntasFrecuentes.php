@@ -27,41 +27,26 @@ $preguntasFrecuentes = Query::listarPreguntasFrecuentes($pdo, 'frequentquestions
           foreach ($preguntasFrecuentes as $pregunta):?>
 
           <?php
-          // $ariaExpanded = ($pregunta["id"] != 1)?"false":"true";
-          // $collapseShow = ($pregunta["id"] != 1)?"collapse":"collapse show";
-
-          $idCollapse = "collapse".$pregunta["id"];
-          $target = "#collapse".$pregunta["id"];
-          $card=($pregunta["id"]=="1")?"collapse":"collapse";
+          $ariaExpanded = ($pregunta["id"] != 1)?"false":"true";
+          $collapseShow = ($pregunta["id"] != 1)?"collapse":"collapse";
            ?>
 
 
           <div class="card">
 
-<<<<<<< HEAD
-          <div class="card-header" id="headingOne">
-          <h2 class="mb-0">
-          <button class="font-preguntas btn btn-link" type="button" data-toggle="collapse" data-target="<?=$target?>" aria-expanded="true" aria-controls="<?=$idCollapse?>">
-=======
           <div class="card-header" id=<?="heading".$pregunta["id"]?>>
           <h2 class="mb-0">
-          <button class="font-preguntas btn btn-link" type="button" data-toggle="collapse" data-target=<?="#collapse".$pregunta["id"]?> aria-expanded="<?=$ariaExpanded?>" aria-controls="collapse".<?=$pregunta["id"]?>>
->>>>>>> 1ecb5a553eb57caf39ddfb97e5dadc84388c4f78
+          <button class="font-preguntas btn btn-link" type="button" data-toggle="collapse" data-target=<?="#collapse".$pregunta["id"]?> aria-expanded="<?=$ariaExpanded?>" aria-controls=<?="collapse".$pregunta["id"]?>>
 
-            <?=$pregunta["name"]?>
+            <?=$pregunta["id"].". ".$pregunta["name"]?>
 
           </button>
           </h2>
           </div>
 
 
-<<<<<<< HEAD
-          <div id="<?=$idCollapse?>" class="<?=$card?>"
-            aria-labelledby="headingOne" data-parent="#accordion">
-=======
           <div id=<?="collapse".$pregunta["id"]?> class="<?=$collapseShow?>"
             aria-labelledby=<?="heading".$pregunta["id"]?> data-parent="#accordion">
->>>>>>> 1ecb5a553eb57caf39ddfb97e5dadc84388c4f78
 
             <div class="card-body">
               <?=$pregunta["answer"]?>
