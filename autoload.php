@@ -9,13 +9,15 @@ require_once("clases/Autenticador.php");
 require_once("clases/BaseMYSQL.php");
 require_once("clases/Query.php");
 require_once("clases/PreguntaFrecuente.php");
-
+require_once("clases/Serie.php");
+require_once("clases/Question.php");
+require_once("clases/Answer.php");
 
 //Declaro mis variables
 $host = "localhost";
 $bd = "seriales_db";
 $user = "root";
-$password = "aldana";
+$password = "root";
 $puerto = "3306";
 $charset = "utf8mb4";
 

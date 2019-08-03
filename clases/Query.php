@@ -78,4 +78,66 @@ class Query{
         $query = $pdo->prepare($sql);
         $query->execute();
     }
+
+static public function listadoSeries($pdo,$tabla){
+
+        $sql="select $tabla.id, $tabla.name, $tabla.image from $tabla order by $tabla.name asc";
+        $consulta= $pdo->query($sql);
+        $listado=$consulta->fetchall(PDO::FETCH_ASSOC);
+        return $listado;
+}
+static public function mostrarSeries($pdo,$tabla,$idSeries){
+        $sql = "select $tabla.id, $tabla.name, $tabla.image from $tabla where $tabla.id = '$idSeries'";
+        $query = $pdo->prepare($sql);
+        $query->execute();
+        $serieEncontrada=$query->fetchAll(PDO::FETCH_ASSOC);
+        return $serieEncontrada;
+}
+static public function mostrarQuestions($pdo,$tabla,$idSeries){
+        $sql="select $tabla.id, $tabla.name, $tabla.image, levels.name as nivel, levels.level, levels.score from questions inner join series on series.id=questions.series_id  inner join levels on levels.id=questions.levels_id  where series.id = '$idSeries'";
+        $query = $pdo->prepare($sql);
+        $query->execute();
+        $serieEncontrada=$query->fetchAll(PDO::FETCH_ASSOC);
+        return $serieEncontrada;
+}
+static public function mostrarAnswer($pdo,$tabla,$idQuestions){
+    $sql= "select answers.id,answers.name, answers.correctAnswer, answers.image,levels.name as nivel, levels.level, levels.score, questions.series_id as serie_id, questions.name as pregunta from answers inner join questions on answers.questions_id=questions.id inner join series on series.id=questions.series_id inner join levels on levels.id=questions.levels_id where questions.id = '$idQuestions'";
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    $serieEncontrada=$query->fetchAll(PDO::FETCH_ASSOC);
+    return $serieEncontrada;
+}
+static public function serieModificar($pdo,$tabla,$idSerie){
+    $sql = "select $tabla.id, $tabla.name, $tabla.image from $tabla where $tabla.id = '$idSerie'";
+    $query = $pdo->prepare($sql);
+    $query->execute();
+    $usuarioModificar=$query->fetch(PDO::FETCH_ASSOC);
+    return $usuarioModificar;
+}
+static public function borrarPreguntas($pdo,$tabla,$idQuestion){
+
+    if($tabla=='answers'){
+    $sql="delete from $tabla where $tabla.questions_id=:id";
+
+   }
+   elseif($tabla=='questions'){
+     $sql="delete from $tabla where $tabla.id=:id";
+
+   }
+   elseif ($tabla=='series') {
+     $sql="delete from $tabla where $tabla.id=:id";
+
+   }
+
+    $query=$pdo->prepare($sql);
+    $query->bindValue(':id',$idQuestion);
+    $query->execute();
+}
+static public function listadoLevel($pdo,$tabla){
+    $sql="select $tabla.id, $tabla.name, $tabla.level from $tabla";
+    $consulta= $pdo->query($sql);
+    $listado=$consulta->fetchall(PDO::FETCH_ASSOC);
+    return $listado;
+
+}
 }

@@ -14,15 +14,15 @@ $preguntasFrecuentes = Query::listarPreguntasFrecuentes($pdo, 'frequentquestions
  <html>
    <head>
      <title>Administrador de preguntas frecuentes</title>
+     <link rel="stylesheet" href="css/master.css">
      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
      <link href="https://fonts.googleapis.com/css?family=Lato|Righteous|Ubuntu|Fjalla+One" rel="stylesheet">
      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-     <link rel="stylesheet" href="css/master.css">
      <meta charset="utf-8">
    </head>
 
    <body>
-
+  <?php require_once("php/headerAdmin.php");?>
      <div class="container-fluid">
 
 <!--Formulario para agregar preguntas frecuentes-->
