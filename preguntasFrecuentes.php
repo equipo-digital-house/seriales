@@ -34,9 +34,9 @@ $preguntasFrecuentes = Query::listarPreguntasFrecuentes($pdo, 'frequentquestions
 
           <div class="card">
 
-          <div class="card-header" id="heading".<?=$pregunta["id"]?>>
+          <div class="card-header" id=<?="heading".$pregunta["id"]?>>
           <h2 class="mb-0">
-          <button class="font-preguntas btn btn-link" type="button" data-toggle="collapse" data-target="#collapse".<?=$pregunta["id"]?> aria-expanded="<?=$ariaExpanded?>" aria-controls="collapse".<?=$pregunta["id"]?>>
+          <button class="font-preguntas btn btn-link" type="button" data-toggle="collapse" data-target=<?="#collapse".$pregunta["id"]?> aria-expanded="<?=$ariaExpanded?>" aria-controls="collapse".<?=$pregunta["id"]?>>
 
             <?=$pregunta["name"]?>
 
@@ -45,8 +45,8 @@ $preguntasFrecuentes = Query::listarPreguntasFrecuentes($pdo, 'frequentquestions
           </div>
 
 
-          <div id="collapse".<?=$pregunta["id"]?> class="<?=$collapseShow?>"
-            aria-labelledby="heading".<?=$pregunta["id"]?> data-parent="#accordion">
+          <div id=<?="collapse".$pregunta["id"]?> class="<?=$collapseShow?>"
+            aria-labelledby=<?="heading".$pregunta["id"]?> data-parent="#accordion">
 
             <div class="card-body">
               <?=$pregunta["answer"]?>
