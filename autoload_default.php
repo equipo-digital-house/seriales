@@ -16,8 +16,13 @@ require_once("clases/Answer.php");
 //Declaro mis variables
 $host = "localhost";
 $bd = "seriales_db";
+<<<<<<< HEAD:autoload.php
 $user = "root";
 $password = "aldana";
+=======
+$user = "";
+$password = "";
+>>>>>>> 1ecb5a553eb57caf39ddfb97e5dadc84388c4f78:autoload_default.php
 $puerto = "3306";
 $charset = "utf8mb4";
 

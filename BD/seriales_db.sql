@@ -21,12 +21,12 @@
 
 DROP TABLE IF EXISTS `answers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `answers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(1000) COLLATE utf8_unicode_ci DEFAULT NULL,
   `correctAnswer` int(11) NOT NULL COMMENT 'si es verdadero=1\nsi es falso=0',
-  `image` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `image` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `questions_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_answers_questions1_idx` (`questions_id`),
@@ -50,11 +50,11 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `frequentquestions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `frequentquestions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
-  `answer` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `name` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `answer` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -75,7 +75,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `games`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `games` (
   `users_id` int(11) NOT NULL,
   `questions_id` int(11) NOT NULL COMMENT 'Queda registrado la pregunta que se le hizo al usuario',
@@ -104,10 +104,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `levels`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `levels` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `name` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `level` int(11) DEFAULT NULL,
   `score` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -131,10 +131,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `questions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `questions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `name` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
   `series_id` int(11) NOT NULL,
   `levels_id` int(11) DEFAULT NULL,
   `image` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -162,11 +162,11 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `series`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `series` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `image` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `name` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `image` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -188,13 +188,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `email` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `password` varchar(60) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `avatar` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `name` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(60) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `avatar` varchar(45) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `access` int(11) NOT NULL COMMENT 'Permisos de accesos\n0=basico\n1=administrador\n',
   `level` int(11) NOT NULL,
   PRIMARY KEY (`id`),

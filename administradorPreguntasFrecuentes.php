@@ -1,5 +1,6 @@
 <?php
 require_once("autoload.php");
+$titulo = "Administrador de preguntas frecuentes";
 
 if($_POST){
   $preguntaFrecuente = new PreguntaFrecuente($_POST['name'], $_POST['answer']);
@@ -12,17 +13,11 @@ $preguntasFrecuentes = Query::listarPreguntasFrecuentes($pdo, 'frequentquestions
 
 
  <html>
-   <head>
-     <title>Administrador de preguntas frecuentes</title>
-     <link rel="stylesheet" href="css/master.css">
-     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-     <link href="https://fonts.googleapis.com/css?family=Lato|Righteous|Ubuntu|Fjalla+One" rel="stylesheet">
-     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-     <meta charset="utf-8">
-   </head>
-
+ <?php
+ require_once("php/head.php");
+  ?>
+  
    <body>
-  <?php require_once("php/headerAdmin.php");?>
      <div class="container-fluid">
 
 <!--Formulario para agregar preguntas frecuentes-->
@@ -88,7 +83,7 @@ $preguntasFrecuentes = Query::listarPreguntasFrecuentes($pdo, 'frequentquestions
           </div>
         </div>
       </section>
-          
+
     </div>
 
      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
