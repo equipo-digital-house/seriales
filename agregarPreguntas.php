@@ -6,7 +6,6 @@ $id_serie=$_GET["id"];
 $serieSeleccionada = Query::mostrarSeries($pdo,'series',$id_serie);
 }
 
-//var_dump($_FILES);
 
 if ($_POST){
 
@@ -49,9 +48,9 @@ if ($_POST){
 //  $respuesta4= new Answer($_POST["respuesta4"],$res4,$question_id,$_FILES["fileRespuesta4"] );
   //Aquí verifico si los datos registrados por el usuario pasan las validaciones
   $errores = $validar->validacionPregunta($pregunta);
-  //De no existir errores entonces:
+
   if(count($errores)==0){
-    //Busco a ver si el usuario existe o no en la base de datos
+
     $encontrarPregunta = BaseMYSQL::buscarPorSerie($pregunta->getName(),$pdo,'questions');
     if($encontrarPregunta != false && encontrarPregunta["series_id"]==$_POST["serie"] ){
 
@@ -59,11 +58,9 @@ if ($_POST){
     }else{
       if(isset($_POST["checkPregunta"]) and $_POST["checkPregunta"]=="on"){
 
-      //Aquí guardo en el servidor la foto que el usuario seleccionó
       $imagePregunta = $registro->armarImagenPregunta($pregunta->getImage());
-      //Aquí procedo a guardar los datos del usuario en la base de datos, ,aquí le paso el objeto PDO, el objeto usuario, la tabla donde se va a guardar los datos y el nombre del archivo de la imagen del usuario.
+
       BaseMYSQL::guardarPregunta($pdo,$pregunta,'questions',$imagePregunta);
-      //Aquí redirecciono el usuario al login
       redirect ("administrador.php");
     }else{
       BaseMYSQL::guardarPregunta($pdo,$pregunta,'questions');
