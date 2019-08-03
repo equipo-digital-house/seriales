@@ -51,59 +51,45 @@ $preguntasFrecuentes = Query::listarPreguntasFrecuentes($pdo, 'frequentquestions
 
 <!--Listado de preguntas frecuentes-->
 
-<div class="spacer"></div>
-  <h2 class="tituloAdminFaq2">Listado de preguntas frecuentes</h2>
-  <div class="spacer"></div>
-  <table class="table">
-      <thead>
-          <tr>
-              <th>
-                  Pregunta
-              </th>
+        <div class="spacer"></div>
+          <h2 class="tituloAdminFaq2">Listado de preguntas frecuentes</h2>
 
-              <th>
-                  Respuesta
-              </th>
+          <div class="spacer"></div>
+          <table class="table">
 
-              <th>
-                  <i class="fas fa-edit"></i>
-              </th>
+              <thead>
+                  <tr>
+                      <th>Pregunta</th>
+                      <th>Respuesta</th>
+                      <th><i class="fas fa-edit"></i></th>
+                      <th><i class="fas fa-trash"></i></th>
+                  </tr>
+              </thead>
 
-              <th>
-                  <i class="fas fa-trash"></i>
-              </th>
-          </tr>
-      </thead>
-      <tbody>
-          <?php foreach ($preguntasFrecuentes as $key => $pregunta) :?>
-          <tr>
-              <td>
-                  <?= $pregunta['name'];?>
-              </td>
-              <td>
-                  <?= $pregunta['answer'];?>
-              </td>
-              <td>
-                  <a href="editarPreguntaFrecuente.php?id=<?=$pregunta['id']?>"><i class="fas fa-edit"></i></a>
-              </td>
-              <td>
-                  <a href="eliminarPreguntaFrecuente.php?id=<?=$pregunta['id']?>"><i class="fas fa-trash"></i></a>
-              </td>
+              <tbody>
+                  <?php foreach ($preguntasFrecuentes as $key => $pregunta) :?>
+                  <tr>
+                      <td><?= $pregunta['name'];?></td>
+                      <td><?= $pregunta['answer'];?></td>
+                      <td>
+                          <a href="editarPreguntaFrecuente.php?id=<?=$pregunta['id']?>"><i class="fas fa-edit"></i></a>
+                      </td>
+                      <td>
+                          <a href="eliminarPreguntaFrecuente.php?id=<?=$pregunta['id']?>"><i class="fas fa-trash"></i></a>
+                      </td>
+                  </tr>
+                  <?php endforeach;?>
+              </tbody>
 
-          </tr>
-          <?php endforeach;?>
+          </table>
 
-
-      </tbody>
-
-  </table>
-
-
-
+            <a class="flechaVolver" href="administrador.php"><i class="fas fa-long-arrow-alt-left"></i></a>
             </div>
-         </div>
-       </section>
-     </div>
+          </div>
+        </div>
+      </section>
+          
+    </div>
 
      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
