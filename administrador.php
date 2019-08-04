@@ -1,6 +1,11 @@
 <?php
 require_once("autoload.php");
 
+if(!isset($_SESSION["email"])){
+  header("location: login.php");
+  exit;
+}
+
  ?>
 <!DOCTYPE html>
 <html lang="es" dir="ltr">
