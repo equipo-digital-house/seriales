@@ -3,8 +3,9 @@
 require_once("autoload.php");
 
 if($_GET){
-$id_serie=$_GET["id"];
-$serieSeleccionada = Query::mostrarQuestions($pdo,'series',$id_serie);
+$id_serie=(int)$_GET["id"];
+$serieSeleccionada = Query::mostrarSeries($pdo,'series',$id_serie);
+var_dump($serieSeleccionada);
 }
 if ($_POST){
   if(isset($_POST["serie"])){

@@ -77,21 +77,21 @@ class BaseMYSQL extends BaseDatos{
         $serie = $query->fetch(PDO::FETCH_ASSOC);
         return $serie;
     }
-    static public function guardarSerie($pdo,$serie,$tabla,$avatar){
+    static public function guardarSerie($pdo,$serie,$tabla){
         $sql = "insert into $tabla (name,image) values (:name,:avatar)";
         $query = $pdo->prepare($sql);
         $query->bindValue(':name',$serie->getNombre());
-        $query->bindValue(':avatar',$avatar);
+        $query->bindValue(':avatar',$serie->getAvatar());
         $query->execute();
       }
       static public function guardarPregunta($pdo,$pregunta,$tabla){
-          $sql = "insert into $tabla (name,series_id,levels_id) values (:name,:serie,:level)";
+          $sql = "insert into $tabla (name,series_id,levels_id,image) values (:name,:serie,:level,:image)";
 
           $query = $pdo->prepare($sql);
           $query->bindValue(':name',$pregunta->getName());
           $query->bindValue(':serie',$pregunta->getSerie_id());
           $query->bindValue(':level',$pregunta->getLevel_id());
-
+          $query->bindValue(':image',$pregunta->getImage());
           $query->execute();
         }
 
@@ -107,32 +107,31 @@ class BaseMYSQL extends BaseDatos{
     public function guardar($usuario){
         //Este fue el método usao para json
     }
-    static public function buscarUltimoRegistroInsertado($pdo,$tabla){
-          $sql="select max($tabla.id) from $tabla";
+static public function buscarUltimoRegistroInsertado($pdo,$tabla){
+      $sql="select max($tabla.id) from $tabla";
 
-          $query=$pdo->prepare($sql);
-          $query->execute();
-          $ultimoRegistro = $query->fetch(PDO::FETCH_ASSOC);
-          return $ultimoRegistro;
+      $query=$pdo->prepare($sql);
+      $query->execute();
+      $ultimoRegistro = $query->fetch(PDO::FETCH_ASSOC);
+      return $ultimoRegistro;
+}
+static public function guardarRespuesta($pdo,$respuesta,$tabla){
+    $sql = "insert into $tabla (name,correctAnswer,image,questions_id) values (:name,:correct,:image,:question)";
+
+    $query = $pdo->prepare($sql);
+    $query->bindValue(':name',$respuesta->getName());
+    $query->bindValue(':correct',$respuesta->getCorrectAnswer());
+    $query->bindValue(':image',$respuesta->getImage());
+    $query->bindValue(':question',$respuesta->getQuestion_id());
+
+    $query->execute();
+  }
+  static public function actualizarSerie($pdo,$id,$tabla,$serie){
+
+        $sql="update $tabla set $tabla.name=:name, $tabla.image=:image where $tabla.id=$id";
+      $query = $pdo->prepare($sql);
+      $query->bindValue(':name',$serie->getNombre());
+      $query->bindValue(':image',$serie->getAvatar());
+      $query->execute();
     }
-    static public function guardarRespuesta($pdo,$respuesta,$tabla){
-        $sql = "insert into $tabla (name,correctAnswer,image,questions_id) values (:name,:correct,:image,:question)";
-
-        $query = $pdo->prepare($sql);
-        $query->bindValue(':name',$respuesta->getName());
-        $query->bindValue(':correct',$respuesta->getCorrectAnswer());
-        $query->bindValue(':image',$respuesta->getImage());
-        $query->bindValue(':question',$respuesta->getQuestion_id());
-
-        $query->execute();
-      }
-      static public function actualizarSerie($pdo,$id,$tabla,$serie){
-
-            $sql="update $tabla set $tabla.name=:name, $tabla.image=:image where $tabla.id=$id";
-          $query = $pdo->prepare($sql);
-          $query->bindValue(':name',$serie->getNombre());
-          $query->bindValue(':image',$serie->getAvatar());
-          $query->execute();
-        }
-
 }

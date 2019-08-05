@@ -9,7 +9,7 @@ class Answer{
     public function __construct($name,$correctAnswer,$question_id,$image=null){
         $this->name = $name;
         $this->correctAnswer = $correctAnswer;
-        $this->level_id= $level_id;
+        $this->question_id= $question_id;
         $this->image= $image;
     }
     public function getName(){
