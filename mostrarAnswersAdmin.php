@@ -29,7 +29,11 @@ $cont=1;
         <img src="<?=$serieSeleccionada[0]["image"]?>" alt="" class="img-fluid rounded mx-auto d-block" width="200px">
       </div>
       <h2 class="text-center"><?=$listadoPregunta[0]["pregunta"]?></h2>
-
+      <ul class="nav justify-content-end">
+      <li class="nav-item">
+        <a class="nav-link" href="mostrarSeriesAdmin.php?id=<?=$id_serie?>"><i class="fas fa-arrow-circle-left" alt="Retornar"></i>Retornar</a>
+      </li>
+      </ul>
         <div class="">
           <table class="table table-bordered text-center">
             <thead class="thead-dark">
@@ -38,7 +42,7 @@ $cont=1;
                 <th scope="col">Respuestas</th>
                 <th scope="col">Correcta</th>
                 <th scope="col">imagen</th>
-                <th scope="col">Modificar</th>
+
 
               </tr>
             </thead>
@@ -53,10 +57,7 @@ $cont=1;
                        <td><img src="<?=$value["image"]?>" alt="" class="img-fluid rounded" width="100px"></td>
                      <?php else:?> <td>Sin Imagen</td>
                      <?php endif;?>
-                        <td><a href="modificarSeriesAdmin.php?id=<?=$value['id'];?>">
-                          <i class="far fa-edit"></i>
-                        </a>
-                    </td>
+
 
 
                   </tr>
@@ -70,5 +71,5 @@ $cont=1;
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<a href="mostrarSeriesAdmin.php?id=<?=$id_serie?>">Retornar</a>
+
 </html>

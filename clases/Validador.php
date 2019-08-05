@@ -200,32 +200,118 @@ class Validador{
 
       return $errores;
   }
+  public function validacionPreguntaImagen($pregunta,$numPregunta=null){
+
+      $errores=array();
+      $nombre = trim($pregunta->getName());
+      if(isset($nombre)) {
+          if(empty($nombre)){
+              $errores["nombre"]= "El campo no debe estar vacio";
+          }
+      }
+
+      switch($numPregunta) {
+        case 1 :
+        if($pregunta->getImage()!=null){
+
+            if($_FILES["fileRespuesta1"]["error"]!=0){
+                $errores["filePregunta"]="Error debe subir imagen";
+            }else{
+              if($pregunta->getImage()){
+                $nombre = $_FILES["fileRespuesta1"]["name"];
+                $ext = pathinfo($nombre,PATHINFO_EXTENSION);
+                if($ext != "png" && $ext != "jpg"){
+                    $errores["avatar"]="Debe seleccionar archivo png ó jpg";
+                }
+            }
+
+        }
+       }
+        break;
+
+        case 2 :
+        if($pregunta->getImage()!=null){
+
+            if($_FILES["fileRespuesta2"]["error"]!=0){
+                $errores["filePregunta"]="Error debe subir imagen";
+            }else{
+              if($pregunta->getImage()){
+                $nombre = $_FILES["fileRespuesta2"]["name"];
+                $ext = pathinfo($nombre,PATHINFO_EXTENSION);
+                if($ext != "png" && $ext != "jpg"){
+                    $errores["avatar"]="Debe seleccionar archivo png ó jpg";
+                }
+            }
+
+        }
+       }
+        break;
+
+        case 3 :
+        if($pregunta->getImage()!=null){
+
+            if($_FILES["fileRespuesta3"]["error"]!=0){
+                $errores["filePregunta"]="Error debe subir imagen";
+            }else{
+              if($pregunta->getImage()){
+                $nombre = $_FILES["fileRespuesta3"]["name"];
+                $ext = pathinfo($nombre,PATHINFO_EXTENSION);
+                if($ext != "png" && $ext != "jpg"){
+                    $errores["avatar"]="Debe seleccionar archivo png ó jpg";
+                }
+            }
+
+        }
+       }
+        break;
+        case 4 :
+        if($pregunta->getImage()!=null){
+
+            if($_FILES["fileRespuesta4"]["error"]!=0){
+                $errores["filePregunta"]="Error debe subir imagen";
+            }else{
+              if($pregunta->getImage()){
+                $nombre = $_FILES["fileRespuesta4"]["name"];
+                $ext = pathinfo($nombre,PATHINFO_EXTENSION);
+                if($ext != "png" && $ext != "jpg"){
+                    $errores["avatar"]="Debe seleccionar archivo png ó jpg";
+                }
+            }
+
+        }
+       }
+        default:
+        if($pregunta->getImage()!=null){
+
+            if($_FILES["filePregunta"]["error"]!=0){
+                $errores["filePregunta"]="Error debe subir imagen";
+            }else{
+              if($pregunta->getImage()){
+                $nombre = $_FILES["filePregunta"]["name"];
+                $ext = pathinfo($nombre,PATHINFO_EXTENSION);
+                if($ext != "png" && $ext != "jpg"){
+                    $errores["avatar"]="Debe seleccionar archivo png ó jpg";
+                }
+            }
+
+        }
+       }
+        break;
+
+      }
+
+  }
   public function validacionPregunta($pregunta){
 
       $errores=array();
       $nombre = trim($pregunta->getName());
       if(isset($nombre)) {
           if(empty($nombre)){
-              $errores["nombre"]= "El campo pregunta de serie no debe estar vacio";
+              $errores["nombre"]= "El campo no debe estar vacio";
           }
       }
-
-      if($pregunta->getImage()!=null){
-          if($_FILES["filePregunta"]["error"]!=0){
-              $errores["filePregunta"]="Error debe subir imagen";
-          }else{
-            if($pregunta->getImage())
-              $nombre = $_FILES["filePregunta"]["name"];
-              $ext = pathinfo($nombre,PATHINFO_EXTENSION);
-              if($ext != "png" && $ext != "jpg"){
-                  $errores["avatar"]="Debe seleccionar archivo png ó jpg";
-              }
-          }
-      }
-
       return $errores;
-  }
-
+      }
 
 
 }

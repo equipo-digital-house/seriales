@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 <?php
-var_dump($_GET);
+
 $acum=0;
 require_once("autoload.php");
 if (isset($_GET["id"])) {

@@ -1,75 +1,57 @@
-
 <?php
+
 require_once("autoload.php");
+
 if($_GET){
 $id_serie=$_GET["id"];
-$serieSeleccionada = Query::mostrarSeries($pdo,'series',$id_serie);
+$serieSeleccionada = Query::mostrarQuestions($pdo,'series',$id_serie);
 }
-
-
 if ($_POST){
-
-      //Aquí genero mi objeto usuario, partiendo de la clase Usuario
-      if(isset($_POST["checkPregunta"])){
-
-        $pregunta = new Question($_POST["pregunta"],$_POST["serie"],$_POST["selectNivel"],$_FILES["filePregunta"] );
-      }
-      else{
-
-          $pregunta = new Question($_POST["pregunta"],$_POST["serie"],$_POST["selectNivel"]);
-      }
-
-
-  $res1=0;
-  $res2=0;
-  $res3=0;
-  $res4=0;
-  switch($_POST["selectPreguntaCorrecta"]) {
-    case 1 :
-    $res1=1;
-    break;
-
-    case 2 :
-    $res2=2;
-    break;
-
-    case 3 :
-    $res3=3;
-    break;
-    case 4 :
-    $res4=4;
-    break;
-
-  }
-    $question_id=0;
-//  $respuesta1= new Answer($_POST["respuesta1"],$res1,$question_id,$_FILES["fileRespuesta1"] );
-//  $respuesta2= new Answer($_POST["respuesta2"],$res2,$question_id,$_FILES["fileRespuesta2"] );
-//  $respuesta3= new Answer($_POST["respuesta3"],$res3,$question_id,$_FILES["fileRespuesta3"] );
-//  $respuesta4= new Answer($_POST["respuesta4"],$res4,$question_id,$_FILES["fileRespuesta4"] );
-  //Aquí verifico si los datos registrados por el usuario pasan las validaciones
-  $errores = $validar->validacionPregunta($pregunta);
-
-  if(count($errores)==0){
-
-    $encontrarPregunta = BaseMYSQL::buscarPorSerie($pregunta->getName(),$pdo,'questions');
-    if($encontrarPregunta != false && encontrarPregunta["series_id"]==$_POST["serie"] ){
-
-             $errores["nombre"]= "Pregunta ya existe en esta Serie";
-    }else{
-      if(isset($_POST["checkPregunta"]) and $_POST["checkPregunta"]=="on"){
-
-      $imagePregunta = $registro->armarImagenPregunta($pregunta->getImage());
-
-      BaseMYSQL::guardarPregunta($pdo,$pregunta,'questions',$imagePregunta);
-      redirect ("administrador.php");
-    }else{
-      BaseMYSQL::guardarPregunta($pdo,$pregunta,'questions');
-        redirect ("administrador.php");
-    }
+  if(isset($_POST["serie"])){
+    $id_serie=$_POST["serie"];
+  }else{
+    $id_serie=$_POST["id"];
   }
 
- }
+//pregunto si la pregunta tiene asociada una imagen
+if(isset($_POST["checkPregunta"]) and $_POST["checkPregunta"]=="on"){
+  //var_dump("entre a check Pregunta");
+      //Aquí genero el objeto del tipo pregunta con el archivo file
+      $pregunta = new Question($_POST["pregunta"],$id_serie,$_POST["selectNivel"],$_FILES["filePregunta"] );
+      //valido la pregunta y la imagen
+      $errores = $validar->validacionPreguntaImagen($pregunta);
+      if(empty($errores)){
+
+            //armo imagen
+            $imagePregunta = $registro->armarImagenPregunta($pregunta->getImage());
+            var_dump($imagePregunta);
+            // asigno imagen  a pregunta
+            $pregunta->setImage($imagePregunta);
+            //guardo en base de datos
+
+            BaseMYSQL::guardarPregunta($pdo,$pregunta,'questions');
+            redirect ("agregarRespuesta.php");
+
+      }
 }
+  else {
+    //en caso de no tener asociada una imagen
+      $pregunta = new Question($_POST["pregunta"],$id_serie,$_POST["selectNivel"]);
+    // valido la pregunta
+        $errores=$validar->validacionPregunta($pregunta);
+        if(count($errores)==0){
+
+          BaseMYSQL::guardarPregunta($pdo,$pregunta,'questions');
+          redirect ("agregarRespuesta.php");
+      }
+
+  }
+}
+
+
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -79,6 +61,7 @@ if ($_POST){
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
   <link rel="stylesheet" href="master.css">
   <title>Registro de Datos</title>
 </head>
@@ -104,12 +87,18 @@ if ($_POST){
           <div class="alert alert-dark" role="alert">
               <h2 class="display-6 text-center">Nueva Pregunta</h2>
             </div>
+            <ul class="nav justify-content-end">
+            <li class="nav-item">
+              <a class="nav-link" href="administrador.php"><i class="fas fa-arrow-circle-left" alt="Retornar"></i>Retornar</a>
+            </li>
 
+            </ul>
           <form class="registro" action="agregarPreguntas.php" method="post" enctype= "multipart/form-data">
             <?php if($_GET):?>
             <div class="img-thumbnail">
               <img src="<?=$serieSeleccionada[0]["image"]?>" alt="" class="img-fluid rounded mx-auto d-block" width="100px">
               <h2 class="text-center"><?=$serieSeleccionada[0]["name"]?></h2>
+
             </div>
           <?php else:?>
 
@@ -125,7 +114,8 @@ if ($_POST){
                 </select>
 
               </div>
-                <?php endif;?>
+              <?php endif;?>
+
           <div class="form-group">
             <label for="InputQuestion">Pregunta</label>
             <input name="pregunta" type="text" class="form-control" value="<?=(isset($errores["pregunta"]) )? "" : inputUsuario("nombre");?>" id="exampleInputEmail1" aria-describedby="questionHelp" placeholder="Ingrese pregunta">
@@ -151,62 +141,8 @@ if ($_POST){
             </select>
             <br>
           </div>
-          <div class="alert alert-dark" role="alert">
-              <h2 class="display-6 text-center">Respuestas</h2>
-            </div>
-          <div class="form-group form-check">
-            <input name="checkRespuesta" type="checkbox" class="form-check-input" id="checkRespuesta">
-            <label class="form-check-label" for="checkRespuesta">Las Respuestas tendrán imagenes asociadas</label>
-          </div>
-          <div class="form-group">
-            <label for="inputRespuesta1">#1 Respuesta</label>
-            <input name="respuesta1" type="text" class="form-control" id="inputRespuesta1" aria-describedby="respuesta1Help" placeholder="Respuesta1">
-            <small id="respuesta1Help" class="form-text text-muted">Si la pregunta tiene asociada una imagen, checkea en agregar imagen</small>
-          </div>
-          <div class="form-group">
-              <input name="fileRespuesta1" type="file" class="form-control-file" id="fileRespuesta1">
-              <small id="fileRespuesta1" class="form-text text-muted">Solo si ha activado Asociar Imagen podrá seleccionar una imagen. (png y jpg)</small>
-            </div>
-            <div class="form-group">
-              <label for="inputRespuesta2">#2 Respuesta</label>
-              <input name="respuesta2"type="text" class="form-control" id="inputRespuesta2" aria-describedby="respuesta2Help" placeholder="Respuesta2">
-              <small id="respuesta2Help" class="form-text text-muted">Si la pregunta tiene asociada una imagen, checkea en agregar imagen</small>
-            </div>
-            <div class="form-group">
-                <input name="fileRespuesta2"type="file" class="form-control-file" id="fileRespuesta2">
-                <small id="fileRespuesta2" class="form-text text-muted">Solo si ha activado Asociar Imagen podrá seleccionar una imagen. (png y jpg)</small>
-              </div>
-              <div class="form-group">
-                <label for="inputRespuesta3">#3 Respuesta</label>
-                <input name="respuesta3"type="text" class="form-control" id="inputRespuesta3" aria-describedby="respuesta3Help" placeholder="Respuesta3">
-                <small id="emailHelp" class="form-text text-muted">Si la pregunta tiene asociada una imagen, checkea en agregar imagen</small>
-              </div>
-              <div class="form-group">
-                  <input name="fileRespuesta3" type="file" class="form-control-file" id="fileRespuesta3">
-                  <small id="fileRespuesta3" class="form-text text-muted">Solo si ha activado Asociar Imagen podrá seleccionar una imagen. (png y jpg)</small>
-                </div>
-                <div class="form-group">
-                  <label for="inputRespuesta4">#4 Respuesta</label>
-                  <input name="respuesta4" type="text" class="form-control" id="inputRespuesta4" aria-describedby="respuesta4Help" placeholder="Respuesta4">
-                  <small id="respuesa4Help" class="form-text text-muted">Si la pregunta tiene asociada una imagen, checkea en agregar imagen</small>
-                </div>
-                <div class="form-group">
-                    <input name="fileRespuesta4"type="file" class="form-control-file" id="fileRespuesta4">
-                    <small id="fileRespuesta4" class="form-text text-muted">Solo si ha activado Asociar Imagen podrá seleccionar una imagen. (png y jpg)</small>
-                  </div>
-                  <div class="form-group">
-                  <label  for="selectCorrectAnswer">Seleccione cuál es la respuesta correcta</label>
 
-                    <select name="selectPreguntaCorrecta" class="form-control" id="selectCorrectAnswer">
-
-                              <option>1</option>
-                              <option>2</option>
-                              <option>3</option>
-                              <option>4</option>
-                  </select>
-                  <br>
-                </div>
-
+      <input type="hidden" name="id" value="<?=$id_serie;?>">
       <button type="submit" class="btn btn-primary">Guardar Pregunta</button>
 
     </form>

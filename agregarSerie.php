@@ -1,4 +1,3 @@
-
 <?php
 
 $titulo = "Agregar Nueva Serie";
@@ -19,10 +18,10 @@ if ($_POST){
       $errores["nombre"] = "Serie ya existe";
     }else{
       $avatar=$registro->armarAvatarSerie($serie->getAvatar(),$serie->getNombre());
-        //var_dump($avatar);
+        $serie->setAvatar($avatar);//var_dump($avatar);
       //Aquí guardo en el servidor la foto que el usuario seleccionó
       //Aquí procedo a guardar los datos del usuario en la base de datos, ,aquí le paso el objeto PDO, el objeto usuario, la tabla donde se va a guardar los datos y el nombre del archivo de la imagen del usuario.
-      BaseMYSQL::guardarSerie($pdo,$serie,'series',$avatar);
+      BaseMYSQL::guardarSerie($pdo,$serie,'series');
       //Aquí redirecciono el usuario al login
       redirect ("administrador.php");
     }

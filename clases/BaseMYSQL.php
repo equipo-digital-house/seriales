@@ -107,5 +107,32 @@ class BaseMYSQL extends BaseDatos{
     public function guardar($usuario){
         //Este fue el método usao para json
     }
+    static public function buscarUltimoRegistroInsertado($pdo,$tabla){
+          $sql="select max($tabla.id) from $tabla";
+
+          $query=$pdo->prepare($sql);
+          $query->execute();
+          $ultimoRegistro = $query->fetch(PDO::FETCH_ASSOC);
+          return $ultimoRegistro;
+    }
+    static public function guardarRespuesta($pdo,$respuesta,$tabla){
+        $sql = "insert into $tabla (name,correctAnswer,image,questions_id) values (:name,:correct,:image,:question)";
+
+        $query = $pdo->prepare($sql);
+        $query->bindValue(':name',$respuesta->getName());
+        $query->bindValue(':correct',$respuesta->getCorrectAnswer());
+        $query->bindValue(':image',$respuesta->getImage());
+        $query->bindValue(':question',$respuesta->getQuestion_id());
+
+        $query->execute();
+      }
+      static public function actualizarSerie($pdo,$id,$tabla,$serie){
+
+            $sql="update $tabla set $tabla.name=:name, $tabla.image=:image where $tabla.id=$id";
+          $query = $pdo->prepare($sql);
+          $query->bindValue(':name',$serie->getNombre());
+          $query->bindValue(':image',$serie->getAvatar());
+          $query->execute();
+        }
 
 }

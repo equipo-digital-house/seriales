@@ -53,7 +53,6 @@ $cont=1;
                 <th scope="col">Nivel</th>
                 <th scope="col">Puntaje</th>
                 <th scope="col">Respuestas</th>
-                <th scope="col">Modificar</th>
                 <th scope="col">Eliminar</th>
               </tr>
             </thead>
@@ -73,7 +72,6 @@ $cont=1;
                         <td><?=$value["nivel"];?></td>
                         <td><?=$value["score"];?></td>
                         <td><a href="mostrarAnswersAdmin.php?id=<?=$value['id'];?>"><i class="far fa-eye"></i></a></td>
-                        <td><a href="modificarPreguntas.php?id=<?=$value['id'];?>"><i class="far fa-edit"></i></a></td>
                         <td><a href="eliminarQuestionsAdmin.php?id=<?=$value['id'];?>"><i class="far fa-trash-alt"></i></a></td>
                   </tr>
               <?php endforeach;?>
